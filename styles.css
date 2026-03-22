@@ -402,3 +402,34 @@ h3{ margin: 0 0 8px; color: var(--navy); }
   .nav.open{ display: grid; gap: 6px; }
   .nav a{ justify-content: center; }
 }
+
+
+
+
+
+.clientes-slider-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.clientes-slider-track {
+  display: flex;
+  width: max-content;
+  animation: scrollClientes 40s linear infinite;
+}
+
+.clientes-slider-track img {
+  height: 100px;
+  margin: 0 40px;
+  object-fit: contain;
+}
+
+@keyframes scrollClientes {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
