@@ -1,0 +1,404 @@
+/* =========================
+   M. González Impermeabilizantes - One page (Netlify)
+   Estilo basado en el portafolio: fondos claros + barras azules + acento verde
+   Archivo: styles.css
+   ========================= */
+
+/* Paleta (extraída del logo / portafolio) */
+:root{
+  --navy: #0B1A33;      /* azul oscuro corporativo */
+  --blue: #2D4997;      /* azul principal */
+  --cyan: #12A6DC;      /* azul claro */
+  --green: #72AE46;     /* verde acento */
+  --ink: #0B1A33;       /* texto principal */
+  --muted: #52627A;     /* texto secundario */
+  --bg: #F6F9FC;        /* fondo */
+  --card: #FFFFFF;      /* tarjetas */
+  --line: rgba(11, 26, 51, .12);
+  --shadow: 0 10px 30px rgba(11,26,51,.10);
+  --radius: 18px;
+  --max: 1120px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(900px 420px at 20% -10%, rgba(18,166,220,.14), transparent 65%),
+    radial-gradient(900px 420px at 85% 0%, rgba(45,73,151,.10), transparent 60%),
+    radial-gradient(900px 420px at 85% 120%, rgba(114,174,70,.10), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+a{ color: inherit; }
+code{ color: var(--blue); }
+
+.container{
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.muted{ color: var(--muted); }
+.small{ font-size: .92rem; }
+
+/* =========================
+   Topbar (claro)
+   ========================= */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar__content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  gap: 14px;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+.brand__dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  box-shadow: 0 0 0 6px rgba(18,166,220,.14);
+}
+.brand__muted{ color: rgba(11,26,51,.65); font-weight: 700; }
+
+.nav{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav a{
+  text-decoration: none;
+  color: rgba(11,26,51,.78);
+  font-weight: 800;
+  font-size: .94rem;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.nav a:hover{
+  border-color: rgba(11,26,51,.16);
+  background: rgba(11,26,51,.04);
+}
+.nav__cta{
+  color: #061224 !important;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  border-color: transparent !important;
+}
+
+/* Mobile menu button */
+.navbtn{
+  display: none;
+  width: 44px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.75);
+  cursor: pointer;
+  padding: 10px;
+}
+.navbtn span{
+  display: block;
+  height: 2px;
+  background: rgba(11,26,51,.78);
+  margin: 5px 0;
+  border-radius: 2px;
+}
+
+/* =========================
+   Hero logo (logo completo al abrir)
+   ========================= */
+.hero{ padding: 26px 0 14px; }
+
+.hero__logoWrap{
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  position: relative;
+}
+
+/* toque visual tipo portafolio: franja superior en diagonal */
+.hero__logoWrap::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(45,73,151,.10), transparent 55%),
+    linear-gradient(225deg, rgba(18,166,220,.10), transparent 55%),
+    linear-gradient(90deg, rgba(114,174,70,.08), transparent 60%);
+  pointer-events: none;
+}
+
+.hero__logo{
+  width: min(980px, 92%);
+  height: auto;
+  display: block;
+  padding: 18px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   Secciones
+   ========================= */
+.section{ padding: 40px 0; }
+.section.alt{
+  background: rgba(45,73,151,.04);
+  border-top: 1px solid rgba(45,73,151,.10);
+  border-bottom: 1px solid rgba(45,73,151,.10);
+}
+
+/* Encabezado de sección tipo “barra” del portafolio */
+.section__head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+/* Barra debajo del título */
+.section__head h2{
+  margin: 0;
+  font-size: 1.65rem;
+  letter-spacing: .2px;
+  position: relative;
+  padding-bottom: 10px;
+}
+.section__head h2::after{
+  content:"";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 120px;
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--green));
+}
+
+.toplink{
+  text-decoration: none;
+  color: rgba(11,26,51,.74);
+  font-weight: 900;
+  border: 1px solid rgba(11,26,51,.14);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+}
+.toplink:hover{
+  border-color: rgba(11,26,51,.22);
+  background: rgba(255,255,255,.95);
+}
+
+.grid{ display: grid; gap: 14px; }
+.grid.two{ grid-template-columns: repeat(2, 1fr); }
+.grid.three{ grid-template-columns: repeat(3, 1fr); }
+
+.card{
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.card.emphasis{
+  background:
+    linear-gradient(180deg, rgba(18,166,220,.10), rgba(255,255,255,1));
+  border-color: rgba(18,166,220,.28);
+}
+
+h3{ margin: 0 0 8px; color: var(--navy); }
+
+.lead{
+  font-size: 1.05rem;
+  color: rgba(11,26,51,.86);
+}
+
+.list{
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: rgba(11,26,51,.74);
+}
+.list li{ margin: 6px 0; }
+.list.compact li{ margin: 4px 0; }
+
+.pillrow{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pill{
+  border: 1px solid rgba(11,26,51,.14);
+  background: rgba(11,26,51,.03);
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: rgba(11,26,51,.78);
+  font-weight: 900;
+}
+
+/* Steps */
+.steps{
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(11,26,51,.74);
+}
+.steps li{ margin: 8px 0; }
+
+/* Subcards */
+.subcard{
+  border: 1px solid rgba(11,26,51,.10);
+  background: rgba(255,255,255,.85);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+/* =========================
+   Botones (claros, con acento verde/azul)
+   ========================= */
+.hero__actions{
+  display: flex;
+  gap: 12px;
+  margin: 18px 0 0;
+  flex-wrap: wrap;
+}
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(11,26,51,.14);
+  background: rgba(255,255,255,.85);
+  color: var(--navy);
+  font-weight: 900;
+}
+.btn:hover{
+  border-color: rgba(11,26,51,.22);
+  background: rgba(255,255,255,1);
+}
+.btn.primary{
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  color: #061224;
+}
+
+/* =========================
+   Contacto
+   ========================= */
+.contact{ display: grid; gap: 12px; margin-top: 14px; }
+.contact__item{ display: flex; gap: 10px; align-items: flex-start; }
+.contact__icon{
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(11,26,51,.14);
+  border-radius: 10px;
+  background: rgba(11,26,51,.03);
+}
+.contact__label{ margin: 0; color: rgba(11,26,51,.70); font-weight: 900; font-size: .9rem; }
+.contact__value{ margin: 2px 0 0; font-weight: 900; }
+
+.form label{
+  display: grid;
+  gap: 6px;
+  font-weight: 900;
+  margin-top: 10px;
+}
+.form input, .form textarea{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(11,26,51,.16);
+  background: rgba(11,26,51,.03);
+  color: var(--navy);
+  outline: none;
+}
+.form input:focus, .form textarea:focus{
+  border-color: rgba(18,166,220,.70);
+  box-shadow: 0 0 0 4px rgba(18,166,220,.14);
+}
+
+/* =========================
+   Footer
+   ========================= */
+.footer{
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  background: rgba(255,255,255,.82);
+}
+.footer__content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: rgba(11,26,51,.70);
+  flex-wrap: wrap;
+}
+.footer__top{ text-decoration: none; font-weight: 900; }
+
+/* Floating button */
+.fab{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,26,51,.16);
+  background: rgba(255,255,255,.92);
+  color: var(--navy);
+  font-weight: 900;
+  cursor: pointer;
+  display: none;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+.fab.show{ display: inline-grid; place-items: center; }
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 860px){
+  .grid.two{ grid-template-columns: 1fr; }
+  .grid.three{ grid-template-columns: 1fr; }
+}
+@media (max-width: 860px){
+  .navbtn{ display: inline-block; }
+  .nav{
+    position: absolute;
+    top: 64px;
+    right: 16px;
+    left: 16px;
+    background: rgba(255,255,255,.96);
+    border: 1px solid rgba(11,26,51,.12);
+    border-radius: 16px;
+    padding: 12px;
+    display: none;
+    box-shadow: var(--shadow);
+  }
+  .nav.open{ display: grid; gap: 6px; }
+  .nav a{ justify-content: center; }
+}
