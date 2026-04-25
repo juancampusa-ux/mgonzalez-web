@@ -38,7 +38,7 @@ function obtenerParametros() {
  ************************************************************/
 function llenarPantalla(data) {
   // Cambiamos data.numero_cotizacion por data.Codigo_Cotizacion
-  $("txtNumero").textContent = data.Codigo_Cotizacion || "-"; 
+ $("txtNumero").textContent = data.codigo_cotizacion || "-";
   $("txtComentario").textContent = data.comentario_validacion || "-";
   
   // OPCIONAL: Si quieres mostrar el Hash en tu HTML
@@ -54,33 +54,29 @@ function llenarPantalla(data) {
 async function cargarPorToken(token) {
   mostrarMensaje("Consultando documento...");
 
-  // OPCION 1: usando vista exclusiva
   const { data, error } = await sb
-    .from("vw_cotizacion_validacion_publica") // <--- Usamos la vista, NO la tabla
-    .select("Codigo_Cotizacion, comentario_validacion, codigo_hash, total")
+    .from("vw_cotizacion_validacion_publica") 
+.select("codigo_cotizacion, comentario_validacion, codigo_hash, total") // Verifica que estos nombres coincidan con la vista
     .eq("qr_token", token.trim()) 
-    .single();
-
-  // OPCION 2: usando RPC segura
-  // const { data, error } = await sb.rpc("fn_validar_cotizacion", { p_token: token });
-  // const fila = Array.isArray(data) ? data[0] : data;
+    .maybeSingle(); // Cambiado a maybeSingle para mejor manejo de errores
 
   if (error) {
     console.error(error);
-    mostrarMensaje("No fue posible validar el documento.", true);
+    mostrarMensaje("Error técnico al consultar la base de datos.", true);
     return;
   }
 
   if (!data) {
-    mostrarMensaje("No se encontró un documento válido para ese token.", true);
+    mostrarMensaje("El código no coincide con un documento oficializado.", true);
+    // Limpiamos pantalla
+    llenarPantalla({}); 
     return;
   }
 
   llenarPantalla(data);
-actualizarUrlPublica(token.trim());
+  actualizarUrlPublica(token.trim());
   mostrarMensaje("Documento validado correctamente.");
 }
-
 /************************************************************
  * BUSQUEDA
  ************************************************************/
