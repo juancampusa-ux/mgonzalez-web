@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Validación de cotización</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="pagina">
+
+    <!-- ENCABEZADO -->
+    <section class="tarjeta encabezado">
+      <div>
+       
+
+<div class="empresa">
+  <img src="IMG/logo_cotizacion.png" alt="Logo empresa" class="logo-empresa" />
+</div>
+
+
+        <p class="subtitulo">
+          Consulta pública del documento mediante token de verificación.
+        </p>
+      </div>
+      <div class="estado-box" id="estadoDocumento">Validado</div>
+    </section>
+
+    <!-- BUSCADOR -->
+    <section class="tarjeta buscador">
+      <label for="entradaBusqueda">Token de verificación</label>
+      <div class="fila-busqueda">
+        <input
+          id="entradaBusqueda"
+          type="text"
+          placeholder="Ej.: A7X9K2P4Q"
+          autocomplete="off"
+        />
+        <button id="btnBuscar" type="button">Buscar</button>
+      </div>
+
+      <p class="ayuda">
+        También puedes acceder directamente usando:
+        <code>?token=XXXXXXX</code>
+      </p>
+
+      <div class="mensaje" id="mensaje"></div>
+    </section>
+
+    <!-- RESULTADO -->
+    <section class="tarjeta resumen">
+
+<div class="grid-resumen">
+  <div class="campo campo-ancho">
+    <span class="etiqueta">Número de cotización</span>
+    <strong id="txtNumero">-</strong>
+  </div>
+
+  <div class="campo campo-ancho">
+    <span class="etiqueta">Validación del documento</span>
+    <strong id="txtComentario">-</strong>
+  </div>
+
+  <div class="campo campo-ancho">
+    <span class="etiqueta">Sello Digital de Seguridad (SHA-256)</span>
+    <code id="txtHash" style="font-size: 11px; color: #627080; word-break: break-all; display: block; margin-top: 5px;">-</code>
+  </div>
+</div>
+
+      <div class="acciones">
+        <button id="btnCopiarLink" type="button">
+          Copiar enlace
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- SUPABASE -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- TU APP -->
+ <script src="app.js" defer></script>
+
+</body>
+</html>
