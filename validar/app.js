@@ -23,13 +23,9 @@ function mostrarMensaje(texto = "", esError = false) {
  ************************************************************/
 function obtenerParametros() {
   const url = new URL(window.location.href);
-  const token = url.searchParams.get("token");
-
-  const segmentos = window.location.pathname.split("/").filter(Boolean);
-  const ultimo = segmentos[segmentos.length - 1] || "";
 
   return {
-    token: token || (ultimo && ultimo !== "index.html" ? decodeURIComponent(ultimo) : null)
+    token: url.searchParams.get("token")
   };
 }
 
