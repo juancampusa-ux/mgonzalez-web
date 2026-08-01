@@ -1,654 +1,1189 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>M. González Impermeabilizantes, SRL — Impermeabilización, aislantes térmicos y pintura · República Dominicana</title>
+<meta name="description" content="Empresa dominicana especializada en impermeabilización, aislantes térmicos y pinturas para obras civiles e industriales. Garantía certificada de 7 años. Cobertura nacional.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   M. GONZÁLEZ IMPERMEABILIZANTES, SRL
+   Sistema de diseño — inspirado en portafolios de arquitectura
+   ============================================================ */
+:root{
+  --tinta:#0F1317;          /* texto principal */
+  --gris:#6E7681;           /* texto secundario */
+  --linea:#E3E6E9;          /* reglas finas */
+  --blanco:#FFFFFF;
+  --hueso:#F6F7F8;          /* fondo alterno */
+  --marino:#1D3A6E;         /* azul oscuro del logo */
+  --azul:#1B7FBF;           /* azul medio del logo */
+  --celeste:#29ABE2;        /* azul claro del logo */
+  --verde:#63B32E;          /* línea verde del techo (firma) */
+  --display:'Archivo Black','Arial Black',Arial,sans-serif;
+  --cuerpo:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+  --pad:clamp(20px,4vw,56px);
+  --maxw:1480px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--cuerpo);
+  color:var(--tinta);
+  background:var(--blanco);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;background:none;border:0;cursor:pointer;color:inherit}
+::selection{background:var(--celeste);color:#fff}
 
-  <title>Impermeabilizante República Dominicana | M. González Impermeabilizantes</title>
-  <meta name="description" content="Servicios de impermeabilización de techos, reparación de filtraciones, aislantes térmicos, pinturas y mantenimiento en República Dominicana para obras civiles, industriales y residenciales." />
-  <meta name="keywords" content="impermeabilización en República Dominicana, impermeabilización de techos, reparación de filtraciones, aislantes térmicos, pintura exterior, trabajos en altura, impermeabilización Santo Domingo" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="M. González Impermeabilizantes, SRL Impermeabilizante Republica Dominicana" />
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 
-  <link rel="canonical" href="https://mgonzalezimp.com.do/" />
-  <link rel="icon" href="/assets/favicon.png">
+/* ---------- utilidades tipográficas ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gris);
+  display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--verde)}
+.display{
+  font-family:var(--display);
+  text-transform:uppercase;
+  line-height:.96;
+  letter-spacing:-.01em;
+}
+h2.display{font-size:clamp(1.9rem,4.2vw,3.4rem);margin:18px 0 0}
+.lede{max-width:62ch;color:var(--gris);font-size:clamp(1rem,1.25vw,1.125rem)}
 
-  <meta property="og:locale" content="es_DO" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Impermeabilizante República Dominicana Impermeabilización de techos en República Dominicana | M. González Impermeabilizantes" />
-  <meta property="og:description" content="Soluciones duraderas para impermeabilización de techos, filtraciones, aislantes térmicos, pinturas y mantenimiento en República Dominicana." />
-  <meta property="og:url" content="https://mgonzalezimp.com.do/" />
-  <meta property="og:site_name" content="M. González Impermeabilizantes, SRL" />
-  <meta property="og:image" content="https://mgonzalezimp.com.do/assets/hero.jpg" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Impermeabilización de techos en República Dominicana | M. González Impermeabilizantes" />
-  <meta name="twitter:description" content="Servicios de impermeabilización, reparación de filtraciones, aislantes térmicos y pintura en República Dominicana." />
-  <meta name="twitter:image" content="https://mgonzalezimp.com.do/assets/hero.jpg" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "M. González Impermeabilizantes, SRL",
-    "url": "https://mgonzalezimp.com.do/",
-    "image": "https://mgonzalezimp.com.do/assets/hero.jpg",
-    "telephone": "+1-809-564-0510",
-    "email": "lgonzalez@mgonzalezimp.com.do",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "DO"
-    },
-    "areaServed": "República Dominicana",
-    "description": "Empresa dominicana especializada en impermeabilización de techos, reparación de filtraciones, aislantes térmicos, pinturas y mantenimientos para obras civiles e industriales.",
-    "sameAs": [
-      "https://www.mgonzalezimp.com.do/"
-    ]
+/* ---------- header ---------- */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(255,255,255,.92);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);
+}
+.header-in{
+  max-width:var(--maxw);margin:0 auto;
+  padding:0 var(--pad);
+  height:72px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:38px;height:38px;object-fit:contain;flex:none}
+.brand-name{line-height:1.05;white-space:nowrap}
+.brand-name b{font-family:var(--display);font-size:15px;letter-spacing:.02em;display:block;text-transform:uppercase}
+.brand-name span{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+.nav{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+.nav a{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:6px 0;position:relative;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+  background:var(--azul);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s ease;
+}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--tinta);color:var(--tinta);
+  padding:12px 20px;transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.btn:hover,.btn:focus-visible{background:var(--tinta);color:#fff}
+.btn.solid{background:var(--tinta);color:#fff}
+.btn.solid:hover{background:var(--azul);border-color:var(--azul)}
+.btn.wa{border-color:var(--verde);background:var(--verde);color:#fff}
+.btn.wa:hover{background:#4f9420;border-color:#4f9420}
+.nav .btn{padding:10px 16px}
+.menu-toggle{display:none;flex-direction:column;gap:5px;padding:8px}
+.menu-toggle span{display:block;width:24px;height:2px;background:var(--tinta);transition:.3s}
+@media (max-width:900px){
+  .nav{
+    position:fixed;inset:72px 0 auto 0;background:#fff;
+    flex-direction:column;align-items:flex-start;gap:0;
+    border-bottom:1px solid var(--linea);
+    padding:8px var(--pad) 24px;
+    transform:translateY(-110%);transition:transform .35s ease;
   }
-  </script>
+  .nav.open{transform:translateY(0)}
+  .nav a{font-size:14px;padding:14px 0;width:100%;border-bottom:1px solid var(--linea)}
+  .nav a::after{display:none}
+  .nav .btn{margin-top:16px}
+  .menu-toggle{display:flex}
+  body.menu-open .menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.menu-open .menu-toggle span:nth-child(2){opacity:0}
+  body.menu-open .menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 
-  <link rel="stylesheet" href="styles.css" />
+/* ---------- hero ---------- */
+.hero{padding-top:72px}
+.hero-top{padding:clamp(48px,7vw,104px) 0 clamp(30px,4vw,52px)}
+.hero-row{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,60px);align-items:center}
+.hero-logo{display:flex;align-items:center;justify-content:center}
+.hero-logo img{width:100%;max-width:420px;height:auto;object-fit:contain}
+.hero h1{
+  font-size:clamp(2.4rem,7vw,6.1rem);
+  max-width:15ch;
+  margin:22px 0 26px;
+}
+.hero h1 .az{color:var(--azul)}
+.hero-sub{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
+.hero-sub .lede{max-width:56ch}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:30px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);
+}
+.hero-meta li{display:flex;align-items:center;gap:9px}
+.hero-meta li::before{content:"";width:7px;height:7px;background:var(--celeste)}
+@media (max-width:900px){
+  .hero-row{grid-template-columns:1fr}
+  .hero-logo{order:-1;justify-content:flex-start}
+  .hero-logo img{max-width:260px}
+}
+.hero-photo{position:relative}
+.hero-photo img{width:100%;height:clamp(240px,42vw,560px);object-fit:cover}
+.hero-photo figcaption{
+  position:absolute;left:var(--pad);bottom:18px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:#fff;background:rgba(15,19,23,.72);padding:8px 14px;
+}
+
+/* ---------- línea de techo (firma de marca) ---------- */
+.roofline{display:block;width:100%;height:46px;overflow:visible}
+.roofline path{fill:none;stroke:var(--verde);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.roofline.on-dark path{stroke:var(--verde)}
+
+/* ---------- banda de cifras ---------- */
+.stats{border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+}
+.stat{
+  padding:clamp(22px,3vw,40px) clamp(14px,2vw,28px);
+  border-left:1px solid var(--linea);
+}
+.stat:first-child{border-left:0}
+.stat b{
+  font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2.5rem);
+  display:block;letter-spacing:-.01em;
+}
+.stat b small{font-size:.55em;color:var(--azul)}
+.stat span{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+@media (max-width:900px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat{border-left:0;border-top:1px solid var(--linea)}
+  .stat:nth-child(-n+2){border-top:0}
+  .stat:nth-child(even){border-left:1px solid var(--linea)}
+}
+
+/* ---------- secciones ---------- */
+.section{padding:clamp(64px,9vw,128px) 0}
+.section.tight{padding-top:clamp(40px,6vw,72px)}
+.section-head{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(30px,4.5vw,58px)}
+.section-head .lede{margin-top:16px}
+
+/* ---------- proyectos ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:6px 22px;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);padding:14px 0;margin-bottom:clamp(26px,3.5vw,44px)}
+.filters .flabel{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);margin-right:8px;padding:8px 0}
+.fbtn{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 2px;position:relative;color:var(--gris);transition:color .2s;
+}
+.fbtn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--azul);transform:scaleX(0);transition:transform .25s ease;transform-origin:left}
+.fbtn:hover{color:var(--tinta)}
+.fbtn.active{color:var(--tinta)}
+.fbtn.active::after{transform:scaleX(1)}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(14px,2vw,26px);
+}
+.card{cursor:pointer;position:relative}
+.card.hide{display:none}
+.card figure{overflow:hidden;position:relative;background:var(--hueso)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+.card:hover img{transform:scale(1.045)}
+.card figure::after{
+  content:"+";position:absolute;right:12px;bottom:10px;
+  font-family:var(--mono);font-size:15px;color:#fff;
+  background:rgba(15,19,23,.62);width:30px;height:30px;
+  display:grid;place-items:center;
+  opacity:0;transition:opacity .3s;
+}
+.card:hover figure::after{opacity:1}
+.card.wide{grid-column:1/-1}
+.card.wide img{aspect-ratio:16/5}
+.card figcaption{
+  display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  border-top:1px solid var(--tinta);
+  margin-top:12px;padding-top:10px;
+}
+.card figcaption h3{font-family:var(--cuerpo);font-weight:600;font-size:14px;letter-spacing:.02em;text-transform:uppercase}
+.card figcaption em{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);flex:none}
+.card:hover figcaption h3{color:var(--azul)}
+.card .sub{font-size:12.5px;color:var(--gris);margin-top:4px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}.card.wide img{aspect-ratio:16/9}}
+
+/* ---------- servicios ---------- */
+#servicios{background:var(--hueso)}
+.serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,44px)}
+.serv{border-top:2px solid var(--tinta);padding-top:22px}
+.serv .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--azul)}
+.serv h3{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.05rem,1.6vw,1.35rem);margin:10px 0 8px;line-height:1.15}
+.serv p{color:var(--gris);font-size:14.5px;margin-bottom:14px}
+.serv ul{border-top:1px solid var(--linea)}
+.serv li{
+  padding:9px 0;border-bottom:1px solid var(--linea);
+  font-size:14px;display:flex;gap:10px;align-items:baseline;
+}
+.serv li::before{content:"—";color:var(--verde);flex:none}
+@media (max-width:900px){.serv-grid{grid-template-columns:1fr}}
+
+/* ---------- proceso ---------- */
+.proc-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(28px,4vw,52px)}
+@media (max-width:900px){.proc-head{grid-template-columns:1fr}}
+.proc{border-top:1px solid var(--tinta)}
+.step{
+  display:grid;grid-template-columns:80px 1fr;gap:18px;
+  padding:18px 0;border-bottom:1px solid var(--linea);
+  align-items:baseline;
+}
+.step b{font-family:var(--display);font-size:1.15rem;color:var(--azul)}
+.step p{font-size:15px;max-width:78ch}
+.step p strong{font-weight:600}
+@media (max-width:600px){.step{grid-template-columns:52px 1fr}}
+
+/* ---------- garantía (banda oscura) ---------- */
+.warranty{background:var(--marino);color:#fff;position:relative}
+.warranty .wrap{padding-top:clamp(60px,8vw,110px);padding-bottom:clamp(60px,8vw,110px)}
+.warranty .eyebrow{color:#9FB4D6}
+.warranty h2{color:#fff;max-width:20ch}
+.warranty h2 .yr{color:var(--celeste)}
+.warranty .lede{color:#C6D2E6}
+.warranty-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,70px);align-items:start}
+.warranty ul{margin-top:26px;border-top:1px solid rgba(255,255,255,.25)}
+.warranty li{
+  padding:15px 0;border-bottom:1px solid rgba(255,255,255,.18);
+  display:flex;gap:14px;align-items:baseline;font-size:15px;
+}
+.warranty li::before{content:"◆";color:var(--verde);font-size:10px;flex:none;transform:translateY(-1px)}
+.warranty .stamp{
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.35);padding:14px 18px;display:inline-block;margin-top:30px;color:#C6D2E6;
+}
+@media (max-width:900px){.warranty-grid{grid-template-columns:1fr}}
+
+/* ---------- nosotros ---------- */
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px)}
+.about-grid .colr img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.about-grid .colr figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);margin-top:10px}
+.about-grid p{margin-bottom:16px;font-size:15.5px}
+.about-grid p.mute{color:var(--gris);font-size:14.5px}
+.mvv{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.5vw,40px);margin-top:clamp(40px,6vw,72px)}
+.mvv article{border-top:2px solid var(--tinta);padding-top:18px}
+.mvv h3{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--azul);margin-bottom:10px}
+.mvv p{font-size:14.5px;color:var(--tinta)}
+.vals{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.vals span{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--tinta);padding:7px 12px;
+}
+@media (max-width:900px){.about-grid,.mvv{grid-template-columns:1fr}}
+
+/* ---------- clientes ---------- */
+#clientes{background:var(--hueso)}
+.cli-lists{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);margin-bottom:clamp(36px,5vw,64px)}
+.cli-lists h3{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--azul);margin-bottom:6px}
+.cli-lists ul{border-top:1px solid var(--tinta)}
+.cli-lists li{padding:11px 0;border-bottom:1px solid var(--linea);font-size:14.5px;display:flex;gap:12px;align-items:baseline}
+.cli-lists li::before{content:"—";color:var(--verde);flex:none}
+.cli-note{font-size:13px;color:var(--gris);margin-top:12px;max-width:52ch}
+@media (max-width:800px){.cli-lists{grid-template-columns:1fr}}
+.logo-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:1px;background:var(--linea);border:1px solid var(--linea);
+}
+.logo-cell{background:#fff;display:grid;place-items:center;padding:22px 18px;min-height:120px}
+.logo-cell img{
+  max-height:74px;width:auto;max-width:100%;object-fit:contain;
+  filter:grayscale(1);opacity:.72;transition:filter .3s,opacity .3s;
+}
+.logo-cell:hover img{filter:grayscale(0);opacity:1}
+
+/* ---------- equipo ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(22px,3.5vw,56px)}
+.tblock h3{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--azul);margin-bottom:6px}
+.tblock ul{border-top:1px solid var(--tinta)}
+.tblock li{
+  padding:12px 0;border-bottom:1px solid var(--linea);
+  display:flex;justify-content:space-between;gap:16px;align-items:baseline;font-size:14.5px;
+}
+.tblock li b{font-weight:600}
+.tblock li span{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);text-align:right}
+@media (max-width:800px){.team-grid{grid-template-columns:1fr}}
+
+/* ---------- contacto ---------- */
+#contacto{border-top:1px solid var(--linea)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);align-items:start}
+.contact-grid h2{max-width:12ch}
+.drops{margin:26px 0 0;display:flex;gap:8px}
+.drops svg{width:16px;height:22px}
+.drops svg:nth-child(2){transform:translateY(6px)}
+.drops svg:nth-child(3){transform:translateY(-3px)}
+.clist{border-top:1px solid var(--tinta)}
+.clist li{border-bottom:1px solid var(--linea);padding:20px 0}
+.clist .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris);display:block;margin-bottom:6px}
+.clist a.big{
+  font-family:var(--display);text-transform:uppercase;
+  font-size:clamp(1.15rem,2.4vw,1.7rem);letter-spacing:.01em;
+  background-image:linear-gradient(var(--azul),var(--azul));
+  background-repeat:no-repeat;background-size:0% 3px;background-position:0 100%;
+  transition:background-size .35s ease,color .25s;
+  padding-bottom:4px;
+}
+.clist a.big:hover{background-size:100% 3px;color:var(--azul)}
+.clist a.mail{font-size:clamp(.95rem,1.6vw,1.15rem);font-family:var(--cuerpo);font-weight:600;text-transform:none;display:inline-block}
+.contact-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--linea);background:var(--blanco)}
+.footer-in{
+  display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;
+  padding-top:34px;padding-bottom:26px;
+}
+.footer .brand img{width:34px;height:34px}
+.footer nav{display:flex;flex-wrap:wrap;gap:18px}
+.footer nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris)}
+.footer nav a:hover{color:var(--tinta)}
+.legal{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);
+  border-top:1px solid var(--linea);padding:16px 0 22px;
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
+}
+
+/* ---------- lightbox ---------- */
+.lb{
+  position:fixed;inset:0;z-index:100;background:rgba(10,13,16,.94);
+  display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;
+  padding:56px 20px 30px;
+}
+.lb.open{display:flex}
+.lb img{max-width:min(92vw,1400px);max-height:76vh;object-fit:contain}
+.lb .lb-cap{
+  color:#cfd6dd;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  text-align:center;
+}
+.lb button{position:absolute;color:#fff;font-family:var(--mono);font-size:13px;letter-spacing:.1em;padding:14px}
+.lb .lb-close{top:16px;right:18px;font-size:15px}
+.lb .lb-prev{left:8px;top:50%;transform:translateY(-50%)}
+.lb .lb-next{right:8px;top:50%;transform:translateY(-50%)}
+.lb button:hover{color:var(--celeste)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+}
+
+
+.hero-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+  gap: 50px;
+}
+
+.hero-logo {
+  align-self: start;
+  transform: translateY(-80px);
+}
+
+.hero-logo img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+
+
+/* Mantiene el contenido original a la izquierda
+   y coloca el carrusel en la mitad derecha */
+.hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 55px;
+}
+
+/* Carrusel derecho */
+.hero-carrusel {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+/* Todas las imágenes ocupan el mismo espacio */
+.hero-foto {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.06);
+
+  transition:
+    opacity 1.2s ease,
+    visibility 1.2s ease,
+    transform 5s ease;
+}
+
+/* Imagen visible */
+.hero-foto.activa {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+
+
+/* ---------- HERO CORREGIDO: texto a la izquierda y carrusel a la derecha ---------- */
+.hero-top{
+  padding-top:clamp(34px,5vw,72px);
+  padding-bottom:clamp(30px,4vw,52px);
+}
+
+.hero-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(28px,4vw,60px);
+}
+
+.hero-content{
+  min-width:0;
+}
+
+.hero-main-logo{
+  display:block;
+  width:min(310px,72%);
+  height:auto;
+  margin:0 0 24px 0;
+  object-fit:contain;
+  transform:none;
+}
+
+.hero-carrusel{
+  position:relative;
+  width:100%;
+  height:clamp(500px,67vh,720px);
+  min-height:500px;
+  overflow:hidden;
+  background:var(--hueso);
+}
+
+.hero-foto{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:center;
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.055);
+  transition:opacity 1.15s ease, visibility 1.15s ease, transform 4.8s ease;
+}
+
+.hero-foto.activa{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1);
+  z-index:1;
+}
+
+@media (max-width:900px){
+  .hero-row{
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  .hero-main-logo{
+    width:min(270px,78%);
+  }
+
+  .hero-carrusel{
+    height:clamp(340px,62vw,520px);
+    min-height:340px;
+  }
+}
+
+@media (max-width:600px){
+  .hero-top{
+    padding-top:34px;
+  }
+
+  .hero-main-logo{
+    width:min(235px,82%);
+    margin-bottom:20px;
+  }
+
+  .hero-carrusel{
+    height:330px;
+    min-height:330px;
+  }
+}
+
+</style>
 </head>
-<body id="inicio">
-  <!-- Barra superior -->
-  <header class="topbar">
-    <div class="container topbar__content">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio">
-        <span class="brand__dot"></span>
-        <span class="brand__text">M. González <span class="brand__muted">Impermeabilizantes, SRL</span></span>
-      </a>
 
-      <button class="navbtn" id="navbtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-        <span></span><span></span><span></span>
-      </button>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const fotos = document.querySelectorAll("#heroCarrusel .hero-foto");
 
-      <nav class="nav" id="nav">
-                <a href="#mensaje">Inicio</a>
-<a href="#quienes">¿Quiénes somos?</a>
-        <a href="#organizacion">Organización</a>
-        <a href="#filosofia">Filosofía</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#trabajos">Trabajos</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#garantia">Garantía</a>
-        <a href="#equipos">Equipos</a>
-        <a href="#contacto" class="nav__cta">Contactos</a>
-      </nav>
-    </div>
-  </header>
+  if (fotos.length === 0) return;
 
-    <!-- Hero / Inicio (Logo completo) -->
-  <section class="hero hero--logo" aria-label="Sección de inicio">
-    <div class="container hero__logoWrap">
-      <img class="hero__logo" src="assets/hero.jpg" alt="Logo M. González Impermeabilizantes, SRL" />
-    </div>
-  </section>
+  let indiceActual = 0;
 
-  <!-- Mensaje principal -->
-  <section class="section section--intro" id="mensaje">
-    <div class="container">
-      <div class="section__head">
-        <h1>Impermeabilización de techos, reparación de filtraciones, aislantes térmicos, pinturas y mantenimientos en República Dominicana</h1>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
+  function cambiarFoto() {
+    fotos[indiceActual].classList.remove("activa");
 
-      <div class="grid two">
-        <div class="card emphasis">
-          <p class="lead" style="margin-top:0;">
-            <strong>Soluciones duraderas para el clima tropical.</strong>
-          </p>
-          <p class="muted" style="margin:0;">
-            Trabajamos con productos de alta calidad y un enfoque orientado a la prevención de filtraciones, corrección efectiva y entrega con estándares de calidad, seguridad y cumplimiento. Atendemos proyectos residenciales, comerciales e industriales en toda República Dominicana.
-          </p>
+    indiceActual = (indiceActual + 1) % fotos.length;
 
-         <div class="hero__actions" style="margin-top:16px;">
-            <a class="btn primary" href="#contacto">Solicitar evaluación</a>
-            <a class="btn" href="#servicios">Ver servicios</a>
-          </div>
+    fotos[indiceActual].classList.add("activa");
+  }
+
+  setInterval(cambiarFoto, 4000);
+});
+</script>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="header-in">
+    <a class="brand" href="#inicio" aria-label="M. González Impermeabilizantes — inicio">
+      <img src="images/favicon.png" alt="">
+      <span class="brand-name">
+        <b>M. González</b>
+        <span>Impermeabilizantes, SRL</span>
+      </span>
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menuToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#contacto">Contacto</a>
+      <a class="btn" href="#contacto">Solicitar cotización</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-top">
+    <div class="hero-row">
+
+      <!-- MITAD IZQUIERDA: CONTENIDO ORIGINAL -->
+      <div class="hero-content">
+        <img
+          src="images/logo empresa y nombre.jpg"
+          alt="M. González Impermeabilizantes"
+          class="hero-main-logo"
+        >
+
+        <p class="eyebrow">Impermeabilización · Aislantes térmicos · Pintura — República Dominicana</p>
+        <h1 class="display">Soluciones duraderas para el <span class="az">climas tropicales</span>.</h1>
+        <p class="lede">Protegemos obras civiles e industriales en todo el territorio nacional con productos de alta calidad, un equipo técnico cualificado y una garantía certificada por escrito.</p>
+
+        <div class="hero-cta" style="margin-top:28px">
+          <a class="btn solid" href="#proyectos">Ver proyectos</a>
+          <a class="btn" href="#contacto">Contáctanos</a>
         </div>
 
-
-  	<div class="card emphasis">
-             <h3>Resumen</h3>
-          <ul class="list">
-            <li>Servicios a nivel nacional</li>
-            <li>Obras civiles e industriales</li>
-            <li>Garantía: Documento notarizado</li>
-            <li>Enfoque: Prevención y corrección</li>
-            <li>Cobertura: República Dominicana</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ¿Quiénes somos? -->
-  <section class="section" id="quienes">
-    <div class="container">
-      <div class="section__head">
-        <h2>¿Quiénes somos?</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
+        <ul class="hero-meta">
+          <li>Obras civiles e industriales</li>
+          <li>Cobertura nacional</li>
+          <li>Garantía notarizada de 7 años</li>
+          <li>Desde 2016</li>
+        </ul>
       </div>
 
-      <div class="grid two">
-	<div class="card emphasis">
-          <p>
-            <strong>M. González Impermeabilizantes, SRL</strong> es una empresa dominicana especializada en impermeabilización, aislantes térmicos, pinturas y mantenimientos,
-            que brinda servicios a nivel nacional para obras civiles e industriales.
-          </p>
-          <p>
-            Desde nuestros inicios hemos trabajado con el firme compromiso de ofrecer soluciones duraderas, ajustadas a las condiciones del clima tropical y a las necesidades reales de cada cliente.
-          </p>
-          <p>
-            Nuestro enfoque incluye impermeabilización de techos de concreto, techos metálicos, terrazas, juntas de expansión, corrección de grietas, aislamiento térmico y pintura exterior con criterios técnicos y seguimiento del servicio.
-          </p>
-        </div>
-
-	<div class="card emphasis">
-          <h3>Trayectoria</h3>
-          <p>
-            Somos una empresa familiar fundada en el año 2017, resultado de la visión conjunta de padre e hijo, quienes tras más de <strong>35 años</strong> de experiencia acumulada
-            en el sector de la impermeabilización, formalizaron un proyecto que ya venía operando de manera continua.
-          </p>
-          <p class="small muted">
-            En el año 2025 iniciamos un proceso de mejora orientado a fortalecer nuestros servicios, elevar la eficiencia operativa y alinearnos con las mejores prácticas del mercado.
-          </p>
-        </div>
+      <!-- MITAD DERECHA: CARRUSEL -->
+      <div class="hero-carrusel" id="heroCarrusel" aria-label="Recorrido visual del proyecto">
+        <img src="images/imgp1.jpeg" alt="Vista aérea frontal del proyecto" class="hero-foto activa">
+        <img src="images/imgp2.jpeg" alt="Vista aérea lateral del proyecto" class="hero-foto">
+        <img src="images/imgp3.jpeg" alt="Vista aérea posterior del proyecto" class="hero-foto">
+        <img src="images/imgp4.jpeg" alt="Vista aérea de la entrada del proyecto" class="hero-foto">
+        <img src="images/imgp5.jpeg" alt="Vista frontal elevada del proyecto" class="hero-foto">
+        <img src="images/imgp6.jpeg" alt="Vista lateral con torre del proyecto" class="hero-foto">
+        <img src="images/imgp7.jpeg" alt="Vista cenital del proyecto" class="hero-foto">
+        <img src="images/imgp8.jpeg" alt="Vista panorámica del proyecto" class="hero-foto">
       </div>
-    </div>
-  </section>
-
-  <!-- Composición Organizativa -->
-  <section class="section alt" id="organizacion">
-    <div class="container">
-      <div class="section__head">
-        <h2>Composición organizativa</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-      <div class="grid two">
-	<div class="card emphasis">
-          <h3>Socios / Alta Dirección</h3>
-          <ul class="list">
-            <li><strong>Gerente General:</strong> Leuis González</li>
-            <li><strong>Asesor:</strong> Mélido González</li>
-          </ul>
-
-          <h3 style="margin-top:14px;">Responsables de procesos / Staff</h3>
-          <ul class="list">
-            <li><strong>Encargada de Operaciones:</strong> Heydi Chireno</li>
-            <li><strong>Encargada Administrativa:</strong> Rita Gómez</li>
-            <li><strong>Responsable de Planificación y Mejora Continua:</strong> Juan Campusano</li>
-          </ul>
-        </div>
-
-	<div class="card emphasis">
-          <h3>Operación</h3>
-          <ul class="list">
-            <li>5 brigadas operativas</li>
-            <li>2 supervisores generales</li>
-          </ul>
-
-          <h3 style="margin-top:14px;">Outsourcing</h3>
-          <ul class="list">
-            <li>Financiero</li>
-            <li>TI y Soporte Técnico</li>
-            <li>Mensajería</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Filosofía Estratégica -->
-  <section class="section" id="filosofia">
-    <div class="container">
-      <div class="section__head">
-        <h2>Filosofía estratégica</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-      <div class="grid three">
-   	<div class="card emphasis">
-          <h3>Misión</h3>
-          <p>
-            Brindar servicios especializados de impermeabilización, aislamiento y pintura, así como de mantenimiento continuo, al sector de la construcción
-            en sus ámbitos empresarial e industrial, gubernamental y residencial. Ofrecemos un servicio de excelencia, respaldado por un personal altamente tecnificado,
-            y colaboramos en la solución de filtraciones a instituciones sin fines de lucro. Ofrecemos servicio de Impermeabilizantes en Republica Dominicana - 
-          </p>
-        </div>
-
-	<div class="card emphasis">
-          <h3>Visión</h3>
-          <p>
-            Ser uno de los principales referentes en los sistemas de impermeabilización, aislamiento y pintura, reconocido por la calidad de nuestros servicios
-            y por contribuir a la seguridad de las estructuras y calidad de vida de nuestros clientes.
-          </p>
-        </div>
-
-	<div class="card emphasis">
-          <h3>Valores</h3>
-          <div class="pillrow">
-            <span class="pill">Calidad</span>
-            <span class="pill">Servicio</span>
-            <span class="pill">Garantía</span>
-            <span class="pill">Seguridad</span>
-            <span class="pill">Responsabilidad</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Clientes -->
-  <section class="section alt" id="clientes">
-    <div class="container">
-      <div class="section__head">
-        <h2>Nuestros clientes</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-    
-<div class="subcard" style="text-align:center;">
-  <h3>Clientes permanentes</h3>
-
-  <div class="clientes-slider-wrapper">
-    <div class="clientes-slider-track">
-
-      <!-- Primera tanda -->
-      <img src="assets/cliente1.png">
-      <img src="assets/cliente2.png">
-      <img src="assets/cliente3.png">
-      <img src="assets/cliente4.png">
-      <img src="assets/cliente5.png">
-      <img src="assets/cliente6.png">
-      <img src="assets/cliente7.png">
-      <img src="assets/cliente8.png">
-      <img src="assets/cliente9.png">
-      <img src="assets/cliente10.png">
-      <img src="assets/cliente11.png">
-      <img src="assets/cliente12.png">
-      <img src="assets/cliente13.png">
-      <img src="assets/cliente14.png">
-      <img src="assets/cliente15.png">
-      <img src="assets/cliente16.png">
-      <img src="assets/cliente17.png">
-      <img src="assets/cliente1.png">
-      <img src="assets/cliente2.png">
-      <img src="assets/cliente3.png">
-      <img src="assets/cliente4.png">
-      <img src="assets/cliente5.png">
-      <img src="assets/cliente6.png">
-      <img src="assets/cliente7.png">
-      <img src="assets/cliente8.png">
-      <img src="assets/cliente9.png">
-      <img src="assets/cliente10.png">
-      <img src="assets/cliente11.png">
-      <img src="assets/cliente12.png">
-      <img src="assets/cliente13.png">
-      <img src="assets/cliente14.png">
-      <img src="assets/cliente15.png">
-      <img src="assets/cliente16.png">
-      <img src="assets/cliente17.png">
-		 <img src="assets/cliente1.png">
-      <img src="assets/cliente2.png">
-      <img src="assets/cliente3.png">
-      <img src="assets/cliente4.png">
-      <img src="assets/cliente5.png">
-      <img src="assets/cliente6.png">
-      <img src="assets/cliente7.png">
-      <img src="assets/cliente8.png">
-      <img src="assets/cliente9.png">
-      <img src="assets/cliente10.png">
-      <img src="assets/cliente11.png">
-      <img src="assets/cliente12.png">
-      <img src="assets/cliente13.png">
-      <img src="assets/cliente14.png">
-      <img src="assets/cliente15.png">
-      <img src="assets/cliente16.png">
-      <img src="assets/cliente17.png">
-      <img src="assets/cliente1.png">
-      <img src="assets/cliente2.png">
-      <img src="assets/cliente3.png">
-      <img src="assets/cliente4.png">
-      <img src="assets/cliente5.png">
-      <img src="assets/cliente6.png">
-      <img src="assets/cliente7.png">
-      <img src="assets/cliente8.png">
-      <img src="assets/cliente9.png">
-      <img src="assets/cliente10.png">
-      <img src="assets/cliente11.png">
-      <img src="assets/cliente12.png">
-      <img src="assets/cliente13.png">
-      <img src="assets/cliente14.png">
-      <img src="assets/cliente15.png">
-      <img src="assets/cliente16.png">
-      <img src="assets/cliente17.png">
-
 
     </div>
   </div>
-</div>
 
+  <svg class="roofline" viewBox="0 0 1440 46" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <path d="M0,40 H84 V16 h20 v10 L236,8 372,40 508,8 644,40 780,8 916,40 1052,8 1188,40 1324,8 1440,36"/>
+  </svg>
+</section>
 
-  <!-- Servicios -->
-  <section class="section" id="servicios">
-    <div class="container">
-      <div class="section__head">
-        <h2>Nuestros servicios</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-      <div class="grid three">
-        <article class="card service">
-          <h3>Impermeabilización (Civiles e Industriales)</h3>
-          <ul class="list">
-            <li>Techos de concreto</li>
-            <li>Techos metálicos (aluzinc)</li>
-            <li>Techos de madera</li>
-            <li>Materiales ligeros de construcción</li>
-            <li>Terrazas</li>
-            <li>Baños (previo al piso)</li>
-            <li>Juntas de expansión</li>
-            <li>Reparación de grietas y puntos críticos</li>
-          </ul>
-        </article>
-
-        <article class="card service">
-          <h3>Pinturas Exteriores y Trabajos en Altura</h3>
-          <ul class="list">
-            <li>Aplicación de pintura acrílica e impermeabilizante</li>
-            <li>Corrección de grietas</li>
-            <li>Lavado a presión</li>
-            <li>Trabajos en guindolas y andamios</li>
-          </ul>
-        </article>
-
-        <article class="card service">
-          <h3>Aislamientos Térmicos</h3>
-          <ul class="list">
-            <li>Aplicación de capas térmicas en azoteas</li>
-            <li>Reducción de temperatura interior</li>
-            <li>Soluciones combinadas con impermeabilización</li>
-          </ul>
-        </article>
-      </div>
+<!-- ================= CIFRAS ================= -->
+ <!-- <section class="stats" aria-label="Cifras de la empresa">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat rv"><b><span class="count" data-target="9999">0</span><small> m²</small></b><span>Impermeabilización ejecutada</span></div>
+      <div class="stat rv"><b><span class="count" data-target="9999">0</span><small> m²</small></b><span>Aislante térmico aplicado</span></div>
+      <div class="stat rv"><b><span class="count" data-target="9999">0</span><small> m²</small></b><span>Pintura aplicada</span></div>
+      <div class="stat rv"><b>+<span class="count" data-target="50">0</span><small> años</small></b><span>Experiencia acumulada</span></div>
+      <div class="stat rv"><b><span class="count" data-target="7">0</span><small> años</small></b><span>Garantía certificada</span></div>
     </div>
-  </section>
+  </div>
+</section> -->
 
-<!-- Trabajos realizados -->
-<section class="section alt" id="trabajos">
-  <div class="container">
-    <div class="section__head">
-      <h2>Trabajos realizados</h2>
-      <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
+<!-- ================= PROYECTOS ================= -->
+<section class="section" id="proyectos">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <p class="eyebrow">Proyectos</p>
+        <h2 class="display">Trabajos realizados</h2>
+      </div>
+      <p class="lede">Una muestra de intervenciones recientes en techos, azoteas y cubiertas: manto asfáltico SBS, aislantes térmicos y acabados de aluminio, documentados con vistas aéreas.</p>
     </div>
 
-    <div class="card">
-      <p class="muted" style="margin-top:0;">
-        Algunos de nuestros trabajos ejecutados, enfocados en soluciones duraderas y correctivas.
-      </p>
+    <div class="filters rv" role="group" aria-label="Filtrar proyectos por sector">
+      <span class="flabel">Sector</span>
+      <button class="fbtn active" data-filter="todos">Todos</button>
+      <button class="fbtn" data-filter="institucional">Institucional</button>
+      <button class="fbtn" data-filter="comercial">Comercial</button>
+      <button class="fbtn" data-filter="residencial">Residencial</button>
+    </div>
 
-      <div class="trabajos-single">
-        <img 
-          src="assets/trabajos.png" 
-          alt="Trabajos realizados de impermeabilización de techos por M. González Impermeabilizantes">
+    <div class="grid" id="projGrid">
+
+      <figure class="card rv" data-cat="institucional" tabindex="0" role="button" aria-label="Ampliar: Templo religioso">
+        <figure><img src="images/img3.jpeg" alt="Vista aérea de un templo religioso con techo impermeabilizado con manto asfáltico gris"></figure>
+        <figcaption><h3>Templo religioso</h3><em>Institucional</em></figcaption>
+        <p class="sub">Membrana asfáltica Granulada</p>
+      </figure>
+
+      <figure class="card rv" data-cat="residencial" tabindex="0" role="button" aria-label="Ampliar: Residencia con paneles solares">
+        <figure><img src="images/trabajo2.jpg" alt="Techo blanco impermeabilizado de una residencia con paneles solares instalados"></figure>
+        <figcaption><h3>Residencia con paneles solares</h3><em>Residencial</em></figcaption>
+        <p class="sub">Impermeabilización + Pintura térmica</p>
+      </figure>
+
+      <figure class="card rv" data-cat="institucional" tabindex="0" role="button" aria-label="Ampliar: Complejo institucional">
+        <figure><img src="images/trabajo3.jpg" alt="Vista aérea de un complejo institucional con techos de teja y azoteas impermeabilizadas en blanco"></figure>
+        <figcaption><h3>Complejo institucional</h3><em>Institucional</em></figcaption>
+        <p class="sub">Cubiertas, azoteas y áreas anexas</p>
+      </figure>
+
+      <figure class="card wide rv" data-cat="residencial" tabindex="0" role="button" aria-label="Ampliar: Azotea completa, vista panorámica">
+        <figure><img src="images/trabajo7_1.jpg" alt="Panorámica aérea de una azotea residencial completamente impermeabilizada con acabado de aluminio"></figure>
+        <figcaption><h3>Azotea completa — vista panorámica</h3><em>Residencial</em></figcaption>
+        <p class="sub">Intervención integral con refuerzo de puntos críticos y traslapes de 10 cm + Terminación en Pintura de Reflectiva</p>
+      </figure>
+
+      <figure class="card rv" data-cat="comercial" tabindex="0" role="button" aria-label="Ampliar: Edificio corporativo">
+        <figure><img src="images/img2.jpeg" alt="Cubierta de un edificio corporativo con tragaluz central y techos impermeabilizados"></figure>
+        <figcaption><h3>Edificio corporativo</h3><em>Comercial</em></figcaption>
+        <p class="sub">Azotea Principal y Explanada de Parqueo</p>
+      </figure>
+
+      <figure class="card rv" data-cat="comercial" tabindex="0" role="button" aria-label="Ampliar: Sucursal bancaria">
+        <figure><img src="images/trabajo5.jpg" alt="Sucursal bancaria con techo y pretiles impermeabilizados en tonos claros"></figure>
+        <figcaption><h3>Sucursal bancaria</h3><em>Comercial</em></figcaption>
+        <p class="sub">Mantenimeinto de Techos, Mochetas y Muros Interiores</p>
+      </figure>
+
+      <figure class="card rv" data-cat="residencial" tabindex="0" role="button" aria-label="Ampliar: Torre residencial">
+        <figure><img src="images/img6.jpeg" alt="Gran azotea plana de torre residencial cubierta con manto asfáltico y acabado de aluminio"></figure>
+        <figcaption><h3>Torre residencial</h3><em>Residencial</em></figcaption>
+        <p class="sub">Manto asfáltico · acabado de aluminio</p>
+      </figure>
+
+      <figure class="card rv" data-cat="residencial" tabindex="0" role="button" aria-label="Ampliar: Conjunto residencial">
+        <figure><img src="images/img4.jpeg" alt="Vista aérea de conjunto residencial con techos de teja y azoteas impermeabilizadas"></figure>
+        <figcaption><h3>Residencia familiar</h3><em>Residencial</em></figcaption>
+        <p class="sub">Impermeabilizante: Sellador Elastomelico Fibrado</p>
+      </figure>
+
+      <figure class="card rv" data-cat="residencial" tabindex="0" role="button" aria-label="Ampliar: Edificio multifamiliar">
+        <figure><img src="images/img5.jpeg" alt="Azotea de edificio multifamiliar con tinacos y superficie impermeabilizada con aluminio"></figure>
+        <figcaption><h3>Complejo Villas Residenciales</h3><em>Residencial</em></figcaption>
+        <p class="sub">Superficie completa</p>
+      </figure>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICIOS ================= -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <p class="eyebrow">Servicios</p>
+        <h2 class="display">Lo que hacemos</h2>
+      </div>
+      <p class="lede">Servicios a nivel nacional para obras civiles e industriales, con enfoque en la prevención de filtraciones y la corrección efectiva de problemas existentes.</p>
+    </div>
+    <div class="serv-grid">
+      <article class="serv rv">
+        <span class="num"></span>
+        <h3>Impermeabilización civil e industrial</h3>
+        <p>Sistemas de manto asfáltico y recubrimientos para cada tipo de superficie.</p>
+        <ul>
+          <li>Techos de concreto</li>
+          <li>Techos metálicos (aluzinc y zinc)</li>
+          <li>Techos de madera</li>
+          <li>Terrazas</li>
+          <li>Baños (previo al piso)</li>
+          <li>Juntas de expansión</li>
+          <li>Reparación de grietas y puntos críticos</li>
+        </ul>
+      </article>
+      <article class="serv rv">
+        <span class="num"></span>
+        <h3>Pinturas exteriores y trabajos en altura</h3>
+        <p>Acabados y mantenimiento de fachadas con equipos certificados.</p>
+        <ul>
+          <li>Pintura acrílica e impermeabilizante</li>
+          <li>Corrección de grietas</li>
+          <li>Lavado a presión</li>
+          <li>Trabajos en guindolas y andamios</li>
+        </ul>
+      </article>
+      <article class="serv rv">
+        <span class="num"></span>
+        <h3>Aislamientos térmicos</h3>
+        <p>Menos temperatura interior, más confort y eficiencia energética.</p>
+        <ul>
+          <li>Capas térmicas en azoteas</li>
+          <li>Reducción de temperatura interior</li>
+          <li>Soluciones combinadas con impermeabilización</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESO ================= -->
+<section class="section" id="proceso">
+  <div class="wrap">
+    <div class="proc-head rv">
+      <div>
+        <p class="eyebrow">Método</p>
+        <h2 class="display">Proceso técnico de aplicación</h2>
+      </div>
+      <p class="lede">Cada trabajo sigue una secuencia controlada, del diagnóstico a la entrega formal, para garantizar la adherencia total del sistema y su durabilidad en el tiempo.</p>
+    </div>
+    <div class="proc rv">
+      <div class="step"><b>01</b><p>Limpieza previa de la superficie a intervenir, eliminando polvo, residuos, grasas y materiales sueltos.</p></div>
+      <div class="step"><b>02</b><p>Resanamiento del área: pañete, fino, reparación de desagües y corrección de pendientes, en los casos que aplique.</p></div>
+      <div class="step"><b>03</b><p>Preparación de la superficie y aplicación de primer, según el tipo de material.</p></div>
+      <div class="step"><b>04</b><p>Refuerzo de esquinas y puntos críticos mediante la aplicación de una doble capa de impermeabilizante, según el tipo de material.</p></div>
+      <div class="step"><b>05</b><p>Colocación de lonas asfálticas tipo SBS con refuerzo en poliéster, aplicadas con soplete a base de fuego.</p></div>
+      <div class="step"><b>06</b><p>Traslapes de 10 cm longitudinales y transversales en cada unión, para garantizar la adherencia total del manto asfáltico.</p></div>
+      <div class="step"><b>07</b><p>Acabado final con pintura de aluminio, cuando sea requerido.</p></div>
+      <div class="step"><b>08</b><p>Limpieza total del área intervenida.</p></div>
+      <div class="step"><b>09</b><p>Entrega formal del trabajo al cliente.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GARANTÍA ================= -->
+<section class="warranty" id="garantia">
+  <svg class="roofline on-dark" viewBox="0 0 1440 46" preserveAspectRatio="xMidYMax meet" aria-hidden="true" style="display:block">
+    <path d="M0,40 H84 V16 h20 v10 L236,8 372,40 508,8 644,40 780,8 916,40 1052,8 1188,40 1324,8 1440,36"/>
+  </svg>
+  <div class="wrap">
+    <div class="warranty-grid">
+      <div class="rv">
+        <p class="eyebrow">Garantía de servicio</p>
+        <h2 class="display">Garantía certificada de <span class="yr">7 años</span> por escrito</h2>
+        <p class="lede" style="margin-top:18px">Un documento notarizado asegura la validez y el cumplimiento del servicio contratado, con respaldo real frente a cualquier situación cubierta.</p>
+        <span class="stamp">Documento notarizado · Válido en todo el territorio nacional</span>
+      </div>
+      <div class="rv">
+        <ul>
+          <li>Durabilidad del sistema aplicado.</li>
+          <li>Cumplimiento técnico del proceso de aplicación.</li>
+          <li>Responsabilidad frente a cualquier situación cubierta por la garantía.</li>
+          <li>Productos de alta calidad, diseñados para soportar altas temperaturas.</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-
-
-  <!-- Proceso técnico -->
-  <section class="section" id="proceso">
-    <div class="container">
-      <div class="section__head">
-        <h2>Proceso técnico de aplicación de Membrana Asfáltica</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-      <div class="card">
-        <ol class="steps">
-          <li>Limpieza previa de la superficie a intervenir, eliminando polvo, residuos, grasas y materiales sueltos.</li>
-          <li>Resanamiento del área: pañete, fino, reparación de desagües y corrección de pendientes (según aplique).</li>
-          <li>Aplicación de primer asfáltico a razón de <strong>0.20 litros por metro cuadrado (LTS/M²)</strong>.</li>
-          <li>Refuerzo de esquinas y puntos críticos con doble capa de lonas asfálticas.</li>
-          <li>Reforzamiento de Zabaletas, mochetas y drenajes con malla refuerzo de poliéster.</li>
-	  <li>Colocación de lonas asfálticas con soplete a base de fuego, tipo SBS, con refuerzo en poliéster.</li>
-          <li>Traslapes longitudinales y transversales de <strong>10 cm</strong> en cada unión, para garantizar adherencia total.</li>
-          <li>Acabado final con pintura de aluminio (cuando sea requerido).</li>
-          <li>Limpieza total del área intervenida.</li>
-          <li>Entrega formal del trabajo al cliente.</li>
-        </ol>
+<!-- ================= NOSOTROS ================= -->
+<section class="section" id="nosotros">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <p class="eyebrow">Nosotros</p>
+        <h2 class="display">Una empresa familiar</h2>
       </div>
     </div>
-  </section>
-
-  <!-- Garantía -->
-  <section class="section alt" id="garantia">
-    <div class="container">
-      <div class="section__head">
-        <h2>Garantía de servicio</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
+    <div class="about-grid">
+      <div class="rv">
+        <p><strong>M. González Impermeabilizantes, SRL</strong> es una empresa dominicana especializada en impermeabilización, aislantes térmicos y pinturas, que brinda servicios a nivel nacional para obras civiles e industriales. Trabajamos con soluciones ajustadas a las condiciones del clima tropical y a las necesidades reales de cada cliente.</p>
+        <p>Fundada en 2017 —con operaciones desde 2016— por la visión conjunta de padre e hijo, la empresa está respaldada por más de 50 años de experiencia acumulada en el sector. Contamos con un equipo técnico capacitado para brindar soluciones duraderas en impermeabilización, aislantes y pinturas, complementadas con trabajos de albañilería relacionados.</p>
+        <p class="mute">En 2025 iniciamos un proceso de mejora orientado a fortalecer nuestros servicios, elevar la eficiencia operativa y alinearnos con las mejores prácticas del mercado. Trabajamos con compromiso, calidad y enfoque al cliente.</p>
       </div>
-
-      <div class="grid two">
-	<div class="card emphasis">
-          <h3>Garantía certificada</h3>
-          <p>
-            Entregamos un <strong>documento notarizado</strong> que certifica la garantía del trabajo realizado, asegurando la validez y el cumplimiento del servicio contratado.
-          </p>
-          <ul class="list">
-            <li>Durabilidad del sistema aplicado.</li>
-            <li>Cumplimiento técnico del proceso.</li>
-            <li>Responsabilidad frente a cualquier situación cubierta por la garantía.</li>
-          </ul>
-        </div>
-
-        <div class="card emphasis">
-          <h3>Lo que garantiza este respaldo</h3>
-          <ul class="list">
-            <li>Transparencia del alcance y condiciones del servicio.</li>
-            <li>Soporte ante reclamos dentro del marco de la garantía.</li>
-            <li>Confianza y trazabilidad del trabajo ejecutado.</li>
-          </ul>
-        </div>
-      </div>
+      <figure class="colr rv">
+        <img src="images/trabajo3.jpg" alt="Vista aérea de un complejo con techos de teja naranja y azoteas impermeabilizadas en blanco">
+        <figcaption>Cobertura nacional — obras civiles e industriales</figcaption>
+      </figure>
     </div>
-  </section>
-
-  <!-- Maquinarias y Equipos -->
-  <section class="section" id="equipos">
-    <div class="container">
-      <div class="section__head">
-        <h2>Maquinarias y equipos</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
-      </div>
-
-      <div class="grid two">
-        <div class="card">
-          <h3>Flotilla de vehículo</h3>
-          <p class="muted">Contamos con una flotilla que garantiza movilidad, respuesta oportuna y capacidad para atender proyectos de diferentes escalas.</p>
-          <ul class="list">
-            <li>Camionetas</li>
-            <li>Camiones</li>
-            <li>Guagua</li>
-            <li>Motor</li>
-            <li>Manlift</li>
-          </ul>
+    <div class="mvv">
+      <article class="rv">
+        <h3>Misión</h3>
+        <p>Ofrecer soluciones de impermeabilización con altos estándares de calidad, aplicadas por un personal cualificado y comprometido, garantizando la protección y durabilidad de cada área intervenida, bajo procesos seguros y con garantía certificada.</p>
+      </article>
+      <article class="rv">
+        <h3>Visión</h3>
+        <p>Ser un referente nacional en el sector de impermeabilización, reconocido por la excelencia en el servicio, la calidad de los trabajos entregados y la confianza generada en cada cliente.</p>
+      </article>
+      <article class="rv">
+        <h3>Valores</h3>
+        <div class="vals">
+          <span>Calidad</span><span>Servicio</span><span>Garantía</span><span>Seguridad</span><span>Responsabilidad</span>
         </div>
-
-        <div class="card">
-          <h3>Dron profesional y cámara endoscópica</h3>
-          <p class="muted">Para inspección de techos, levantamientos previos y elaboración de reportes visuales.</p>
-          <ul class="list">
-            <li>Evaluar áreas de difícil acceso.</li>
-            <li>Registrar evidencias fotográficas y de video para el cliente.</li>
-            <li>Mejorar la precisión en el diagnóstico y la planificación del servicio.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="grid two" style="margin-top:14px;">
-        <div class="card">
-          <h3>Herramientas operativas por brigada</h3>
-          <p class="muted">Cada brigada está equipada con herramientas esenciales para ejecutar los trabajos con eficiencia, seguridad y calidad.</p>
-          <ul class="list">
-            <li>Escaleras y andamios</li>
-            <li>Equipos de aplicación</li>
-            <li>Sopladores térmicos</li>
-            <li>Herramientas manuales</li>
-            <li>Cuerdas</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3>Equipo de protección personal (EPP)</h3>
-          <p class="muted">Todo el personal operativo utiliza EPP completo conforme a mejores prácticas de seguridad.</p>
-          <ul class="list">
-            <li>Cascos</li>
-            <li>Guantes</li>
-            <li>Lentes de seguridad</li>
-            <li>Arnés para trabajos en altura</li>
-            <li>Chalecos reflectivos</li>
-            <li>Calzado de seguridad</li>
-            <li>Extintor</li>
-          </ul>
-        </div>
-      </div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contacto -->
-  <section class="section alt" id="contacto">
-    <div class="container">
-      <div class="section__head">
-        <h2>Contactos</h2>
-        <a class="toplink" href="#inicio" aria-label="Volver al inicio">↑ Inicio</a>
+<!-- ================= CLIENTES ================= -->
+<section class="section" id="clientes">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <p class="eyebrow">Clientes</p>
+        <h2 class="display">Quiénes confían en nosotros</h2>
       </div>
-
-      <div class="grid one">
-        <div class="card">
-          <h3>Contáctanos</h3>
-          <p>Comunícate con nosotros y descubre más sobre nuestros servicios. Estaremos atentos para atenderte.</p>
-
-          <div class="contact">
-            <div class="contact__item">
-              <span class="contact__icon">📞</span>
-              <div>
-                <p class="contact__label">Central + WhatsApp</p>
-                <p class="contact__value"><a href="tel:+18095640510">809-564-0510</a></p>
-              </div>
-            </div>
-
-            <div class="contact__item">
-              <span class="contact__icon">📱</span>
-              <div>
-                <p class="contact__label">Móvil</p>
-                <p class="contact__value"><a href="tel:+18298539368">829-853-9368</a></p>
-              </div>
-            </div>
-
-            <div class="contact__item">
-              <span class="contact__icon">✉️</span>
-              <div>
-                <p class="contact__label">Correo</p>
-                <p class="contact__value"><a href="mailto:lgonzalez@mgonzalezimp.com.do">lgonzalez@mgonzalezimp.com.do</a></p>
-                <p class="contact__value"><a href="mailto:gestion@mgonzalezimp.com.do">gestion@mgonzalezimp.com.do</a></p>
-              </div>
-            </div>
-
-            <div class="contact__item">
-              <span class="contact__icon">🌐</span>
-              <div>
-                <p class="contact__label">Web</p>
-                <p class="contact__value"><a href="https://www.mgonzalezimp.com.do" target="_blank" rel="noreferrer">www.mgonzalezimp.com.do</a></p>
-              </div>
-            </div>
-
-<div class="contact__cta">
-  <a class="btn whatsapp" 
-     href="https://wa.me/18298539368?text=Hola,%20deseo%20una%20evaluación%20de%20servicio"
-     target="_blank" 
-     rel="noreferrer">
-    Escribir por WhatsApp
-  </a>
-
-<style>
-  .contact__cta{
-    margin-top: 16px;
-  }
-
-.btn.whatsapp{
-  display: inline-block;
-  padding: 14px 32px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  color: #fff;
-  background: #53a837;
-}
-
-  .btn.whatsapp:hover{
-    filter: brightness(0.95);
-  }
-</style>
-</div>
-          </div>
-        </div>
-
-
-      
-
-
-
+      <p class="lede">Constructoras, bancos comerciales, entidades gubernamentales, instituciones y residencias en todo el territorio nacional: clientes permanentes de instalación y mantenimiento continuo, y clientes por proyecto para trabajos específicos.</p>
+    </div>
+    <div class="cli-lists">
+      <div class="rv">
+        <h3>Clientes permanentes</h3>
+        <ul>
+          <li>Banco de Reservas — Dirección de Ingeniería</li>
+          <li>Constructora LUTHJE — Residenciales ADONAI</li>
+          <li>Constructora SOLER</li>
+          <li>Constructora DISCONCA</li>
+          <li>Constructora ISLA S.R.L.</li>
+          <li>COZMAR, Constructora y Servicios Generales (Bancos Popular y Scotia Bank)</li>
+        </ul>
       </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer__content">
-      <p>© <span id="year"></span> M. González Impermeabilizantes, SRL</p>
-      <a href="#inicio" class="footer__top">Volver arriba ↑</a>
-    </div>
-  </footer>
-
-  <button class="fab" id="fabTop" aria-label="Subir al inicio" title="Subir al inicio">↑</button>
-
-  <script src="script.js"></script>
-
-<!-- BOTÓN WHATSAPP -->
-<a href="https://wa.me/18298539368?text=Hola%20deseo%20una%20evaluaci%C3%B3n%20de%20servicio"
-   class="whatsapp-float"
-   target="_blank">
+      <div class="rv">
+        <h3>Clientes por proyecto</h3>
+        <ul>
+          
+          <li>Seminario Pontificio Santo Tomás de Aquino</li>
+          <li>Santuario Cristo de Bayaguana</li>
+          <li>Arzobispado de Santo Domingo — Comisión de Pastoral</li>
    
-   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-</a>
+          <li>Sector hotelero y privado, entre otros</li>
+        </ul>
+      </div>
+    </div>
+    <div class="logo-grid rv" aria-label="Logotipos de clientes">
+      <div class="logo-cell"><img src="images/cliente1.png" alt="Banco de Reservas — Dirección de Ingeniería"></div>
+      <div class="logo-cell"><img src="images/cliente2.png" alt="Constructora LUTHJE — Residenciales ADONAI"></div>
+      <div class="logo-cell"><img src="images/cliente3.png" alt="Constructora SOLER"></div>
+      <div class="logo-cell"><img src="images/cliente4.png" alt="Constructora DISCONCA"></div>
+      <div class="logo-cell"><img src="images/cliente5.png" alt="COZMAR, Constructora y Servicios Generales"></div>
+      <div class="logo-cell"><img src="images/cliente6.png" alt="Constructora ISLA S.R.L."></div>
+      <div class="logo-cell"><img src="images/cliente7.png" alt="J.L. Editora"></div>
+      <div class="logo-cell"><img src="images/cliente8.png" alt="Centro Médico Docente Siglo 21"></div>
+      <div class="logo-cell"><img src="images/cliente9.png" alt="AINDA Invest"></div>
+      <div class="logo-cell"><img src="images/cliente10.png" alt="Aro y Pedal"></div>
+      <div class="logo-cell"><img src="images/cliente11.png" alt="Grupo BASAN"></div>
+      <div class="logo-cell"><img src="images/cliente12.png" alt="TORRECO — Diseño, Construcción, Interiores"></div>
+      <div class="logo-cell"><img src="images/cliente13.png" alt="Institución religiosa"></div>
+      <div class="logo-cell"><img src="images/cliente14.png" alt="Cliente institucional"></div>
+      <div class="logo-cell"><img src="images/cliente15.png" alt="Patronato Contra el Cáncer del Nordeste"></div>
+      <div class="logo-cell"><img src="images/cliente16.png" alt="Institución eclesiástica"></div>
+      <div class="logo-cell"><img src="images/cliente17.png" alt="Cliente del sector construcción"></div>
+      <div class="logo-cell"><img src="images/cliente18.png" alt="Cliente del sector industrial"></div>
+    </div>
+  </div>
+</section>
 
+<!-- ================= EQUIPO ================= -->
+<section class="section" id="equipo">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div>
+        <p class="eyebrow">Equipo</p>
+        <h2 class="display">Composición del equipo</h2>
+      </div>
+    </div>
+    <div class="team-grid">
+      <div class="tblock rv">
+        <h3>Socios / Alta dirección</h3>
+        <ul>
+          <li><b>Leuis González</b><span>Gerente General</span></li>
+          <li><b>Mélido González</b><span>Asesor</span></li>
+        </ul>
+      </div>
+      <div class="tblock rv">
+        <h3>Responsables de procesos / Staff</h3>
+        <ul>
+          <li><b>Heydi Chireno</b><span>Encargada de Operaciones</span></li>
+          <li><b>Rita Gómez</b><span>Encargada Administrativa</span></li>
+          <li><b>Juan Campusano</b><span>Planificación y Mejora Continua</span></li>
+        </ul>
+      </div>
+      <div class="tblock rv">
+        <h3>Operativos</h3>
+        <ul>
+          <li><b>5 brigadas operativas</b><span>Campo</span></li>
+          <li><b>2 supervisores generales</b><span>Supervisión</span></li>
+        </ul>
+      </div>
+      <div class="tblock rv">
+        <h3>Outsourcing</h3>
+        <ul>
+          <li><b>Financiero</b><span>Externo</span></li>
+          <li><b>TI y Soporte Técnico</b><span>Externo</span></li>
+          <li><b>Mensajería</b><span>Externo</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section class="section" id="contacto">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <p class="eyebrow">Contacto</p>
+        <h2 class="display">Contáctanos</h2>
+        <div class="drops" aria-hidden="true">
+          <svg viewBox="0 0 16 22"><path d="M8 1C8 1 1.5 9.5 1.5 14a6.5 6.5 0 0 0 13 0C14.5 9.5 8 1 8 1Z" fill="#29ABE2"/></svg>
+          <svg viewBox="0 0 16 22"><path d="M8 1C8 1 1.5 9.5 1.5 14a6.5 6.5 0 0 0 13 0C14.5 9.5 8 1 8 1Z" fill="#1B7FBF"/></svg>
+          <svg viewBox="0 0 16 22"><path d="M8 1C8 1 1.5 9.5 1.5 14a6.5 6.5 0 0 0 13 0C14.5 9.5 8 1 8 1Z" fill="#1D3A6E"/></svg>
+        </div>
+        <p class="lede" style="margin-top:22px">Comunícate con nosotros y descubre más sobre nuestros servicios. Estaremos atentos para atenderte.</p>
+        <div class="contact-cta">
+          <a class="btn wa" href="https://wa.me/18095640510" target="_blank" rel="noopener">WhatsApp directo</a>
+          <a class="btn" href="mailto:gestion@mgonzalezimp.com.do">Escribir correo</a>
+        </div>
+      </div>
+      <ul class="clist rv">
+        <li>
+          <span class="lab">Central + WhatsApp</span>
+          <a class="big" href="tel:+18095640510">809-564-0510</a>
+        </li>
+        <li>
+          <span class="lab">Móvil</span>
+          <a class="big" href="tel:+18298539368">829-853-9368</a>
+        </li>
+        <li>
+          <span class="lab">Correo</span>
+            <a class="big mail" href="mailto:gestion@mgonzalezimp.com.do">gestion@mgonzalezimp.com.do</a><br>
+          <a class="big mail" href="mailto:lgonzalez@mgonzalezimp.com.do">lgonzalez@mgonzalezimp.com.do</a>
+        
+        </li>
+        <li>
+          <span class="lab">Web</span>
+          <a class="big mail" href="https://www.mgonzalezimp.com.do" target="_blank" rel="noopener">www.mgonzalezimp.com.do</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap footer-in">
+    <a class="brand" href="#inicio">
+      <img src="images/favicon.png" alt="">
+      <span class="brand-name">
+        <b>M. González</b>
+        <span>Impermeabilizantes, SRL</span>
+      </span>
+    </a>
+    <nav aria-label="Navegación de pie de página">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    <span>© <span id="year">2026</span> M. González Impermeabilizantes, SRL — República Dominicana</span>
+    <span>Impermeabilización · Aislantes térmicos · Pintura</span>
+  </div>
+  <svg class="roofline" viewBox="0 0 1440 46" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+    <path d="M0,40 H84 V16 h20 v10 L236,8 372,40 508,8 644,40 780,8 916,40 1052,8 1188,40 1324,8 1440,36"/>
+  </svg>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Vista ampliada del proyecto">
+  <button class="lb-close" id="lbClose" aria-label="Cerrar">CERRAR ✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="Anterior">←</button>
+  <img id="lbImg" src="" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+  <button class="lb-next" id="lbNext" aria-label="Siguiente">→</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- menú móvil ---- */
+  var toggle=document.getElementById('menuToggle'),
+      nav=document.getElementById('nav');
+  toggle.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    document.body.classList.toggle('menu-open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      nav.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* ---- revelado al hacer scroll ---- */
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rvs=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:.12});
+    rvs.forEach(function(el){io.observe(el);});
+  }else{
+    rvs.forEach(function(el){el.classList.add('in');});
+  }
+
+  /* ---- contadores ---- */
+  function animateCount(el){
+    var target=parseInt(el.getAttribute('data-target'),10)||0;
+    if(reduce){el.textContent=target.toLocaleString('es-DO');return;}
+    var dur=1400,start=null;
+    function tick(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      p=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*p).toLocaleString('es-DO');
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  var counts=document.querySelectorAll('.count');
+  if('IntersectionObserver' in window){
+    var cio=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){animateCount(e.target);cio.unobserve(e.target);}
+      });
+    },{threshold:.5});
+    counts.forEach(function(el){cio.observe(el);});
+  }else{
+    counts.forEach(animateCount);
+  }
+
+  /* ---- filtros de proyectos ---- */
+  var fbtns=document.querySelectorAll('.fbtn'),
+      cards=document.querySelectorAll('#projGrid .card');
+  fbtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      fbtns.forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var f=btn.getAttribute('data-filter');
+      cards.forEach(function(c){
+        var show=(f==='todos'||c.getAttribute('data-cat')===f);
+        c.classList.toggle('hide',!show);
+      });
+    });
+  });
+
+  /* ---- lightbox ---- */
+  var lb=document.getElementById('lb'),
+      lbImg=document.getElementById('lbImg'),
+      lbCap=document.getElementById('lbCap'),
+      list=[],idx=0;
+  cards.forEach(function(c,i){
+    list.push({
+      src:c.querySelector('img').getAttribute('src'),
+      alt:c.querySelector('img').getAttribute('alt'),
+      cap:c.querySelector('h3').textContent+' — '+c.querySelector('em').textContent
+    });
+    c.addEventListener('click',function(){idx=i;openLb();});
+    c.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();idx=i;openLb();}
+    });
+  });
+  function render(){
+    lbImg.src=list[idx].src;
+    lbImg.alt=list[idx].alt;
+    lbCap.textContent=list[idx].cap;
+  }
+  function openLb(){render();lb.classList.add('open');document.body.style.overflow='hidden';}
+  function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+  function next(d){idx=(idx+d+list.length)%list.length;render();}
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  document.getElementById('lbPrev').addEventListener('click',function(){next(-1);});
+  document.getElementById('lbNext').addEventListener('click',function(){next(1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')closeLb();
+    if(e.key==='ArrowRight')next(1);
+    if(e.key==='ArrowLeft')next(-1);
+  });
+
+  /* ---- año ---- */
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
 </body>
 </html>
-
-<style>
-/* Trabajos realizados - imagen única */
-#trabajos .trabajos-single{
-  width: 100%;
-  overflow: hidden;
-  margin-top: 12px;
-  text-align: center;
-}
-
-#trabajos .trabajos-single img{
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-</style>
-
 
