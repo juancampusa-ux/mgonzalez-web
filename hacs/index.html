@@ -3,10 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Validación de presupuesto — M. González Impermeabilizantes</title>
-  <meta name="description" content="Consulta pública para verificar la autenticidad de un presupuesto emitido por M. González Impermeabilizantes, SRL." />
+  <title>Servicios en línea — M. González Impermeabilizantes</title>
+  <meta name="description" content="Servicios en línea de M. González Impermeabilizantes, SRL: solicitud de cotización, reclamación de garantía y verificación de autenticidad de documentos." />
   <link rel="icon" href="/images/favicon.png" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .grupo { margin-bottom: 26px; }
+    .grupo-titulo {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: #627080;
+      margin: 0 0 4px;
+    }
+    .grupo-sub {
+      font-size: 13px;
+      color: #8a94a3;
+      margin: 0 0 16px;
+    }
+
+    .rejilla {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .opcion {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: #fff;
+      border: 1px solid #e3e9f2;
+      border-radius: 14px;
+      padding: 20px 20px 18px;
+      transition: border-color .18s, box-shadow .18s, transform .18s;
+    }
+    .opcion:hover {
+      border-color: #b9ccea;
+      box-shadow: 0 6px 20px rgba(30, 58, 138, .09);
+      transform: translateY(-2px);
+    }
+    .opcion-icono { font-size: 26px; line-height: 1; display: block; margin-bottom: 12px; }
+    .opcion-titulo { font-size: 15.5px; font-weight: 700; margin: 0 0 5px; }
+    .opcion-texto { font-size: 12.8px; color: #627080; margin: 0; line-height: 1.55; }
+    .opcion-pie {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    .grupo.destacado .opcion { border-color: #d7e3f7; background: #fbfdff; }
+  </style>
 </head>
 <body>
   <main class="pagina">
@@ -15,83 +65,88 @@
     <section class="tarjeta encabezado">
       <div>
         <div class="empresa">
-          <img src="IMG/logo_cotizacion.png" alt="M. González Impermeabilizantes, SRL" class="logo-empresa" />
+          <img src="IMG/logo_cotizacion.png"
+               alt="M. González Impermeabilizantes, SRL" class="logo-empresa" />
         </div>
-        <h1>Validación de presupuesto</h1>
+        <h1>Servicios en línea</h1>
         <p class="subtitulo">
-          Consulta pública del documento mediante su token de verificación.
+          Solicite una cotización, reclame una garantía o verifique la autenticidad
+          de un documento emitido por la empresa.
         </p>
       </div>
-      <div class="estado-box" id="estadoDocumento">Esperando token</div>
     </section>
 
-    <!-- BUSCADOR -->
-    <section class="tarjeta buscador">
-      <label for="entradaBusqueda">Token de verificación</label>
-      <div class="fila-busqueda">
-        <input id="entradaBusqueda" type="text"
-               placeholder="Ej.: c39662cb2" autocomplete="off" maxlength="20" />
-        <button id="btnBuscar" type="button">Buscar</button>
+    <!-- SERVICIOS -->
+    <section class="tarjeta">
+      <div class="grupo destacado">
+        <p class="grupo-titulo">Servicios</p>
+        <p class="grupo-sub">Solicitudes que atendemos directamente desde aquí.</p>
+
+        <div class="rejilla">
+          <a class="opcion" href="cotizacion/">
+            <span class="opcion-icono">📝</span>
+            <p class="opcion-titulo">Solicitar cotización</p>
+            <p class="opcion-texto">
+              Cuéntenos qué necesita impermeabilizar y le preparamos una propuesta.
+            </p>
+            <span class="opcion-pie">Comenzar →</span>
+          </a>
+
+          <a class="opcion" href="reclamacion/">
+            <span class="opcion-icono">🛡️</span>
+            <p class="opcion-titulo">Reclamación de garantía</p>
+            <p class="opcion-texto">
+              Si su trabajo está dentro del período de garantía, registre aquí su reclamación.
+            </p>
+            <span class="opcion-pie">Comenzar →</span>
+          </a>
+        </div>
       </div>
 
-      <p class="ayuda">
-        El token aparece bajo el código QR de su documento. También puede acceder
-        directamente usando <code>?token=XXXXXXXXX</code>
-      </p>
+      <!-- CONSULTA DE AUTENTICIDAD -->
+      <div class="grupo" style="margin-bottom:0;">
+        <p class="grupo-titulo">Consulta de autenticidad</p>
+        <p class="grupo-sub">
+          Verifique con el token del código QR que su documento fue emitido por nosotros.
+        </p>
 
-      <div class="mensaje" id="mensaje"></div>
-    </section>
+        <div class="rejilla">
+          <a class="opcion" href="presupuesto/">
+            <span class="opcion-icono">📄</span>
+            <p class="opcion-titulo">Presupuesto</p>
+            <p class="opcion-texto">Confirme el número, la fecha y el monto de su presupuesto.</p>
+            <span class="opcion-pie">Verificar →</span>
+          </a>
 
-    <!-- RESULTADO -->
-    <section class="tarjeta resumen oculto" id="bloqueResultado">
-      <div class="grid-resumen">
+          <a class="opcion" href="factura/">
+            <span class="opcion-icono">🧾</span>
+            <p class="opcion-titulo">Factura</p>
+            <p class="opcion-texto">Confirme los datos de una factura emitida por la empresa.</p>
+            <span class="opcion-pie">Verificar →</span>
+          </a>
 
-        <div class="campo">
-          <span class="etiqueta">Número de presupuesto</span>
-          <strong id="txtNumero">-</strong>
+          <a class="opcion" href="garantia/">
+            <span class="opcion-icono">📜</span>
+            <p class="opcion-titulo">Carta de garantía</p>
+            <p class="opcion-texto">Confirme su vigencia y consulte los períodos de cobertura.</p>
+            <span class="opcion-pie">Verificar →</span>
+          </a>
         </div>
-
-        <div class="campo">
-          <span class="etiqueta">Fecha de emisión</span>
-          <strong id="txtFecha">-</strong>
-        </div>
-
-        <div class="campo">
-          <span class="etiqueta">Monto total</span>
-          <strong id="txtTotal">-</strong>
-        </div>
-
-        <div class="campo campo-ancho">
-          <span class="etiqueta">Validación del documento</span>
-          <strong id="txtComentario">-</strong>
-        </div>
-
-        <div class="campo campo-ancho">
-          <span class="etiqueta">Sello digital de seguridad (SHA-256)</span>
-          <code id="txtHash"
-                style="font-size:11px;color:#627080;word-break:break-all;display:block;margin-top:5px;">-</code>
-        </div>
-
-      </div>
-
-      <div class="acciones">
-        <button id="btnCopiarLink" type="button">Copiar enlace</button>
-        <a class="boton-enlace" href="/" style="background:#eef2f7;color:#415163;">Ir al sitio</a>
       </div>
     </section>
 
     <!-- NOTA -->
     <section class="tarjeta nota-publica">
       <p style="margin:0;font-size:13px;">
-        Esta consulta confirma únicamente la autenticidad y el monto del documento.
-        Para cualquier aclaración escriba a
-        <strong>gestion@mgonzalezimp.com.do</strong> o al <strong>809-564-0510</strong>.
+        ¿Prefiere hablar con nosotros? Escríbanos a
+        <strong>gestion@mgonzalezimp.com.do</strong>, llame al <strong>809-564-0510</strong>
+        o escriba por WhatsApp al mismo número.
+      </p>
+      <p style="margin:10px 0 0;">
+        <a class="boton-enlace" href="/" style="background:#eef2f7;color:#415163;">Ir al sitio</a>
       </p>
     </section>
 
   </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js" defer></script>
 </body>
 </html>
