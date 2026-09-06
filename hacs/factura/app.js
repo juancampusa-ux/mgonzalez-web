@@ -1,17 +1,17 @@
-
 /************************************************************
  * VALIDACIÓN PÚBLICA DE FACTURAS A CLIENTE — HACS
  *
- * Consulta la función fn_validar_factura del esquema dev_v2.
+ * Consulta la función fn_validar_factura del proyecto público
+ * HACS_Publico, separado del sistema interno. Esta página nunca
+ * toca la base de operaciones de la empresa.
  * Esa función exige el token: sin token, o con uno inexistente,
  * no devuelve nada. La página nunca lee tablas directamente.
  ************************************************************/
 
 const CONFIG = {
-  supabaseUrl:     "https://zhpwfbenzixgaekqkedc.supabase.co",
-  supabaseAnonKey: "sb_publishable_k0KQhm5SviDwIQFn3NBlUA_TcDq-EX7",
+  supabaseUrl:     "https://ivhugxvnyzbxysrpfizw.supabase.co",
+  supabaseAnonKey: "sb_publishable_zae_6aYstZhuhsAMwd_31w_sqhmctUy",
   publicBaseUrl:   "https://mgonzalezimp.com.do/hacs/factura/",
-  esquema:         "dev_v2",
   rpc:             "fn_validar_factura"
 };
 
@@ -96,7 +96,6 @@ async function cargarPorToken(token) {
   fijarEstado("Consultando", "");
 
   const { data, error } = await sb
-    .schema(CONFIG.esquema)
     .rpc(CONFIG.rpc, { p_token: token });
 
   if (error) {
