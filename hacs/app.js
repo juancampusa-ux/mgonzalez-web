@@ -1,7 +1,17 @@
+/************************************************************
+ * VALIDACIÓN PÚBLICA DE PRESUPUESTOS — HACS
+ *
+ * Consulta la función fn_validar_presupuesto del esquema dev_v2.
+ * Esa función exige el token: sin token, o con uno inexistente,
+ * no devuelve nada. La página nunca lee tablas directamente.
+ ************************************************************/
+
 const CONFIG = {
-  supabaseUrl: "https://zhpwfbenzixgaekqkedc.supabase.co",
+  supabaseUrl:     "https://zhpwfbenzixgaekqkedc.supabase.co",
   supabaseAnonKey: "sb_publishable_k0KQhm5SviDwIQFn3NBlUA_TcDq-EX7",
-  publicBaseUrl: "https://mgonzalezimp.com.do/hacs"
+  publicBaseUrl:   "https://mgonzalezimp.com.do/hacs/presupuesto",
+  esquema:         "dev_v2",
+  rpc:             "fn_validar_presupuesto"
 };
 
 const sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
@@ -9,7 +19,7 @@ const sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
 const $ = (id) => document.getElementById(id);
 
 /************************************************************
- * MENSAJES
+ * MENSAJES Y ESTADO
  ************************************************************/
 function mostrarMensaje(texto = "", esError = false) {
   const el = $("mensaje");
@@ -18,73 +28,118 @@ function mostrarMensaje(texto = "", esError = false) {
   el.style.color = esError ? "#991b1b" : "#627080";
 }
 
-/************************************************************
- * PARAMETROS URL
- ************************************************************/
-function obtenerParametros() {
-  const url = new URL(window.location.href);
-  const token = url.searchParams.get("token");
+function fijarEstado(texto, clase) {
+  const el = $("estadoDocumento");
+  if (!el) return;
+  el.textContent = texto;
+  el.className = "estado-box" + (clase ? " " + clase : "");
+}
 
-  const segmentos = window.location.pathname.split("/").filter(Boolean);
-  const ultimo = segmentos[segmentos.length - 1] || "";
-
-  return {
-    token: token || (ultimo && ultimo !== "index.html" ? decodeURIComponent(ultimo) : null)
-  };
+function mostrarResultado(visible) {
+  const el = $("bloqueResultado");
+  if (el) el.classList.toggle("oculto", !visible);
 }
 
 /************************************************************
- * LLENAR PANTALLA
+ * FORMATO
+ ************************************************************/
+function formatearMonto(valor) {
+  const n = Number(valor);
+  if (!isFinite(n)) return "-";
+  return "RD$ " + n.toLocaleString("es-DO", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function formatearFecha(valor) {
+  if (!valor) return "-";
+  const [a, m, d] = String(valor).split("-");
+  if (!a || !m || !d) return valor;
+  const meses = ["enero","febrero","marzo","abril","mayo","junio",
+                 "julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  return `${Number(d)} de ${meses[Number(m) - 1]} de ${a}`;
+}
+
+/************************************************************
+ * PARÁMETROS DE LA URL
+ ************************************************************/
+function obtenerToken() {
+  const url = new URL(window.location.href);
+  const token = url.searchParams.get("token");
+  return token ? token.trim() : null;
+}
+
+/************************************************************
+ * PINTAR RESULTADO
  ************************************************************/
 function llenarPantalla(data) {
-  // Cambiamos data.numero_cotizacion por data.Codigo_Cotizacion
- $("txtNumero").textContent = data.codigo_cotizacion || "-";
+  $("txtNumero").textContent     = data.codigo_presupuesto    || "-";
+  $("txtFecha").textContent      = formatearFecha(data.fecha_presupuesto);
+  $("txtTotal").textContent      = formatearMonto(data.total);
   $("txtComentario").textContent = data.comentario_validacion || "-";
-  
-  // OPCIONAL: Si quieres mostrar el Hash en tu HTML
-  if ($("txtHash")) {
-    $("txtHash").textContent = data.codigo_hash || "-";
-  }
+  $("txtHash").textContent       = data.codigo_hash           || "-";
+}
+
+function limpiarPantalla() {
+  ["txtNumero","txtFecha","txtTotal","txtComentario","txtHash"]
+    .forEach(id => { if ($(id)) $(id).textContent = "-"; });
+  mostrarResultado(false);
 }
 
 /************************************************************
  * CONSULTA POR TOKEN
- * Ajusta esta parte según uses VISTA o RPC
  ************************************************************/
 async function cargarPorToken(token) {
   mostrarMensaje("Consultando documento...");
+  fijarEstado("Consultando", "");
 
   const { data, error } = await sb
-    .from("vw_cotizacion_validacion_publica") 
-.select("codigo_cotizacion, comentario_validacion, codigo_hash, total") // Verifica que estos nombres coincidan con la vista
-    .eq("qr_token", token.trim()) 
-    .maybeSingle(); // Cambiado a maybeSingle para mejor manejo de errores
+    .schema(CONFIG.esquema)
+    .rpc(CONFIG.rpc, { p_token: token });
 
   if (error) {
     console.error(error);
-    mostrarMensaje("Error técnico al consultar la base de datos.", true);
+    mostrarMensaje("No fue posible consultar el documento en este momento.", true);
+    fijarEstado("No disponible", "estado-anulada");
+    limpiarPantalla();
     return;
   }
 
-  if (!data) {
-    mostrarMensaje("El código no coincide con un documento oficializado.", true);
-    // Limpiamos pantalla
-    llenarPantalla({}); 
+  const registro = Array.isArray(data) ? data[0] : data;
+
+  if (!registro) {
+    mostrarMensaje("El token no corresponde a ningún documento vigente emitido por la empresa.", true);
+    fijarEstado("No encontrado", "estado-anulada");
+    limpiarPantalla();
     return;
   }
 
-  llenarPantalla(data);
-  actualizarUrlPublica(token.trim());
-  mostrarMensaje("Documento validado correctamente.");
+  llenarPantalla(registro);
+  mostrarResultado(true);
+  actualizarUrlPublica(token);
+
+  // El sello se recalcula sobre el documento completo: cabecera y detalle.
+  if (registro.integro === false) {
+    fijarEstado("Sello no coincide", "estado-anulada");
+    mostrarMensaje(
+      "El documento existe, pero su sello digital no coincide con el contenido registrado. " +
+      "Comuníquese con la empresa antes de darlo por válido.", true);
+    return;
+  }
+
+  fijarEstado("Documento válido", "estado-vigente");
+  mostrarMensaje("Documento verificado correctamente.");
 }
+
 /************************************************************
- * BUSQUEDA
+ * BÚSQUEDA MANUAL
  ************************************************************/
-async function buscarCotizacion() {
+async function buscarPresupuesto() {
   const entrada = $("entradaBusqueda").value.trim();
 
   if (!entrada) {
-    mostrarMensaje("Digite el token de verificación.", true);
+    mostrarMensaje("Digite el token de verificación que aparece en su documento.", true);
     return;
   }
 
@@ -92,16 +147,13 @@ async function buscarCotizacion() {
 }
 
 /************************************************************
- * ACTUALIZAR URL
+ * URL PÚBLICA
  ************************************************************/
 function actualizarUrlPublica(token) {
-  const nuevaUrl = `${CONFIG.publicBaseUrl}/?token=${encodeURIComponent(token)}`;
+  const nuevaUrl = `${CONFIG.publicBaseUrl}?token=${encodeURIComponent(token)}`;
   window.history.replaceState({}, "", nuevaUrl);
 }
 
-/************************************************************
- * COPIAR LINK
- ************************************************************/
 async function copiarLink() {
   try {
     await navigator.clipboard.writeText(window.location.href);
@@ -113,30 +165,26 @@ async function copiarLink() {
 }
 
 /************************************************************
- * CARGA AUTOMATICA
- ************************************************************/
-async function cargarAutomatico() {
-  const { token } = obtenerParametros();
-
-  if (token) {
-    $("entradaBusqueda").value = token;
-    await cargarPorToken(token);
-  }
-}
-
-/************************************************************
- * INIT
+ * INICIO
  ************************************************************/
 window.addEventListener("DOMContentLoaded", async () => {
-  $("btnBuscar").addEventListener("click", buscarCotizacion);
+  $("btnBuscar").addEventListener("click", buscarPresupuesto);
   $("btnCopiarLink").addEventListener("click", copiarLink);
 
   $("entradaBusqueda").addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      await buscarCotizacion();
+      await buscarPresupuesto();
     }
   });
 
-  await cargarAutomatico();
+  const token = obtenerToken();
+
+  if (token) {
+    $("entradaBusqueda").value = token;
+    await cargarPorToken(token);
+  } else {
+    fijarEstado("Esperando token", "");
+    mostrarMensaje("Escriba el token de su documento para verificarlo.");
+  }
 });
