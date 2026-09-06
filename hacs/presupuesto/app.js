@@ -9,7 +9,7 @@
 const CONFIG = {
   supabaseUrl:     "https://zhpwfbenzixgaekqkedc.supabase.co",
   supabaseAnonKey: "sb_publishable_k0KQhm5SviDwIQFn3NBlUA_TcDq-EX7",
-  publicBaseUrl:   "https://mgonzalezimp.com.do/hacs/",
+  publicBaseUrl:   "https://mgonzalezimp.com.do/hacs/presupuesto/",
   esquema:         "dev_v2",
   rpc:             "fn_validar_presupuesto"
 };
