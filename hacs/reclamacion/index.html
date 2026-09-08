@@ -47,6 +47,9 @@
       outline: none; border-color: #0d6efd; background: #f8fbff;
     }
     .campo-form textarea { min-height: 96px; resize: vertical; }
+    .campo-form select {
+      font-size: 15px; background: #fff; cursor: pointer;
+    }
     .campo-form input.telefono {
       font-family: "Courier New", monospace; font-size: 17px; letter-spacing: .06em;
     }
@@ -217,7 +220,16 @@
         Buscar mi trabajo
       </button>
 
-      <div class="direcciones" id="listaDirecciones"></div>
+      <!-- Selector de dirección: aparece al encontrar coincidencias -->
+      <div class="campo-form" id="bloqueDireccion" style="display:none;margin-top:18px;">
+        <label for="selDireccion">
+          Confirme su dirección <span class="obligatorio">*</span>
+          <span class="pista">— se muestran los primeros caracteres</span>
+        </label>
+        <select id="selDireccion">
+          <option value="">— Seleccione la suya —</option>
+        </select>
+      </div>
     </div>
 
     <div class="aviso info" id="avisoPaso1" style="margin-top:14px;display:none;"></div>
