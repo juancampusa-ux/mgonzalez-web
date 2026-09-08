@@ -90,6 +90,30 @@ function activarMascara(id) {
 }
 
 /************************************************************
+ * MENSAJES DE ERROR
+ *
+ * El cliente nunca debe ver un mensaje técnico. Los errores del
+ * servidor que sí le hablan a él (fechas, teléfonos, reclamación
+ * duplicada) se muestran tal cual; todo lo demás se traduce a un
+ * aviso comprensible y el detalle queda en la consola.
+ ************************************************************/
+function mensajeParaElCliente(error, respaldo) {
+  console.error("Detalle técnico:", error);
+
+  const texto = String(error?.message || "");
+
+  // Señales de un problema de configuración o de red
+  const esTecnico =
+    /schema cache|function|relation|column|permission denied|JWT|fetch|network|401|403|404|500|PGRST/i
+      .test(texto);
+
+  if (!texto || esTecnico) return respaldo;
+
+  // Los mensajes que la base escribió pensando en el cliente
+  return texto;
+}
+
+/************************************************************
  * VÍA DE IDENTIFICACIÓN
  ************************************************************/
 function elegirVia(via) {
@@ -101,7 +125,7 @@ function elegirVia(via) {
   $("bloqueCodigo").classList.toggle("visible", via === "codigo");
   $("bloqueDatos").classList.toggle("visible",  via === "datos");
 
-  $("listaDirecciones").innerHTML = "";
+  ocultarSelectorDireccion();
   avisar("avisoPaso1", "");
 }
 
@@ -121,8 +145,10 @@ async function buscarPorToken(tokenExterno) {
   const { data, error } = await sb.rpc("fn_validar_garantia", { p_token: token });
 
   if (error) {
-    console.error(error);
-    avisar("avisoPaso1", "No fue posible consultar en este momento. Intente más tarde.", "error");
+    avisar("avisoPaso1", mensajeParaElCliente(error,
+      "No pudimos completar la consulta en este momento. Intente de nuevo en unos minutos " +
+      "o llame al 809-564-0510."), "error");
+    fijarEstado("No disponible", "estado-anulada");
     return;
   }
 
@@ -164,7 +190,7 @@ async function buscarPorDatos() {
   }
 
   avisar("avisoPaso1", "Buscando su trabajo...", "info");
-  $("listaDirecciones").innerHTML = "";
+  ocultarSelectorDireccion();
 
   const { data, error } = await sb.rpc("fn_buscar_historico", {
     p_telefono: telefono,
@@ -172,8 +198,10 @@ async function buscarPorDatos() {
   });
 
   if (error) {
-    console.error(error);
-    avisar("avisoPaso1", error.message || "No fue posible consultar en este momento.", "error");
+    avisar("avisoPaso1", mensajeParaElCliente(error,
+      "No pudimos completar la búsqueda en este momento. Intente de nuevo en unos minutos " +
+      "o llame al 809-564-0510."), "error");
+    fijarEstado("No disponible", "estado-anulada");
     return;
   }
 
@@ -189,40 +217,51 @@ async function buscarPorDatos() {
   avisar("avisoPaso1",
     data.length === 1
       ? "Encontramos su trabajo. Confirme la dirección para continuar."
-      : `Encontramos ${data.length} trabajos. Elija el que corresponde.`,
+      : `Encontramos ${data.length} direcciones. Elija la que corresponde.`,
     "ok");
 
-  pintarDirecciones(data);
+  llenarSelectorDireccion(data);
 }
 
-function pintarDirecciones(lista) {
-  const cont = $("listaDirecciones");
-  cont.innerHTML = "";
+/* La dirección funciona como validación final: solo quien conoce
+   su propio domicilio reconoce el fragmento correcto. */
+function llenarSelectorDireccion(lista) {
+  const sel = $("selDireccion");
+  sel.innerHTML = '<option value="">— Seleccione la suya —</option>';
 
   lista.forEach((d) => {
-    const boton = document.createElement("button");
-    boton.type = "button";
-    boton.className = "direccion-op";
-    boton.innerHTML =
-      `<strong>${d.direccion_prefijo}…</strong>` +
-      `<span>Documento del ${formatearFecha(d.fecha_documento)}` +
-      (d.garantia_texto ? ` · Garantía: ${d.garantia_texto}` : "") +
-      `</span>`;
-
-    boton.addEventListener("click", () => {
-      cont.querySelectorAll(".direccion-op")
-          .forEach((b) => b.classList.remove("activa"));
-      boton.classList.add("activa");
-
-      Estado.historicoId = d.historico_id;
-      Estado.token       = null;
-
-      fijarEstado("Trabajo identificado", "estado-vigente");
-      abrirPaso2();
-    });
-
-    cont.appendChild(boton);
+    const opcion = document.createElement("option");
+    opcion.value = d.historico_id;
+    opcion.textContent = d.direccion_prefijo + "…";
+    sel.appendChild(opcion);
   });
+
+  $("bloqueDireccion").style.display = "block";
+
+  // Con una sola coincidencia igual se pide confirmar
+  sel.onchange = () => {
+    const id = sel.value;
+
+    if (!id) {
+      Estado.historicoId = null;
+      $("tarjetaReclamo").style.display = "none";
+      fijarEstado("Sin identificar", "");
+      return;
+    }
+
+    Estado.historicoId = Number(id);
+    Estado.token = null;
+    fijarEstado("Trabajo identificado", "estado-vigente");
+    abrirPaso2();
+  };
+}
+
+function ocultarSelectorDireccion() {
+  const bloque = $("bloqueDireccion");
+  if (!bloque) return;
+  bloque.style.display = "none";
+  $("selDireccion").innerHTML = '<option value="">— Seleccione la suya —</option>';
+  Estado.historicoId = null;
 }
 
 /************************************************************
@@ -327,8 +366,9 @@ async function enviarReclamacion() {
   $("btnEnviar").disabled = false;
 
   if (error) {
-    console.error(error);
-    avisar("avisoPaso2", error.message || "No fue posible registrar la reclamación.", "error");
+    avisar("avisoPaso2", mensajeParaElCliente(error,
+      "No pudimos registrar su reclamación en este momento. Intente de nuevo en unos minutos, " +
+      "o llámenos al 809-564-0510 y la tomamos por teléfono."), "error");
     return;
   }
 
@@ -370,7 +410,7 @@ function comenzarDeNuevo() {
   ["txtTelefono","txtContacto"]
     .forEach(id => { if ($(id)) $(id).value = PLANTILLA; });
 
-  $("listaDirecciones").innerHTML = "";
+  ocultarSelectorDireccion();
   $("miniaturas").innerHTML = "";
   $("tarjetaReclamo").style.display = "none";
   $("tarjetaFinal").style.display   = "none";
