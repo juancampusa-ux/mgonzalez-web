@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reclamación de garantía — M. González Impermeabilizantes</title>
+  <meta name="description" content="Registre una reclamación de garantía sobre un trabajo realizado por M. González Impermeabilizantes, SRL." />
+  <link rel="icon" href="/images/favicon.png" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .paso { margin-bottom: 22px; }
+    .paso-titulo {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: #627080; margin: 0 0 4px;
+    }
+    .paso-sub { font-size: 13px; color: #8a94a3; margin: 0 0 14px; }
+
+    /* Selector de vía */
+    .vias { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .via {
+      border: 2px solid #e3e9f2; border-radius: 12px; padding: 16px;
+      background: #fff; cursor: pointer; text-align: left;
+      font-family: inherit; font-size: 14px; transition: all .18s;
+    }
+    .via:hover { border-color: #b9ccea; background: #fbfdff; }
+    .via.activa { border-color: #0d6efd; background: #eff6ff; }
+    .via-icono { font-size: 24px; display: block; margin-bottom: 8px; }
+    .via-titulo { font-weight: 700; margin: 0 0 4px; color: #17212b; }
+    .via-texto { font-size: 12.5px; color: #627080; margin: 0; line-height: 1.5; }
+
+    .bloque { display: none; }
+    .bloque.visible { display: block; }
+
+    /* Campos */
+    .campo-form { margin-bottom: 16px; }
+    .campo-form label {
+      display: block; font-size: 13px; font-weight: 700;
+      margin-bottom: 6px; color: #17212b;
+    }
+    .campo-form .pista { font-size: 12px; color: #8a94a3; font-weight: 400; }
+    .campo-form input, .campo-form textarea, .campo-form select {
+      width: 100%; padding: 11px 13px; border: 1px solid #d8e1eb;
+      border-radius: 10px; font-size: 15px; font-family: inherit;
+      box-sizing: border-box; background: #fff;
+    }
+    .campo-form input:focus, .campo-form textarea:focus {
+      outline: none; border-color: #0d6efd; background: #f8fbff;
+    }
+    .campo-form textarea { min-height: 96px; resize: vertical; }
+    .campo-form input.telefono {
+      font-family: "Courier New", monospace; font-size: 17px; letter-spacing: .06em;
+    }
+
+    .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* Referencia visual del documento */
+    .referencia {
+      border: 1px solid #d8e1eb; border-radius: 12px;
+      overflow: hidden; margin-top: 12px; background: #fff;
+    }
+    .referencia-titulo {
+      background: #eef2f7; padding: 8px 14px;
+      font-size: 12px; font-weight: 700; color: #415163;
+    }
+    .referencia table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    .referencia td { padding: 7px 14px; border-bottom: 1px solid #eef2f7; }
+    .referencia td:first-child { font-weight: 700; width: 90px; color: #415163; }
+    .referencia tr.destacada td { background: #fff8e1; }
+    .referencia tr.destacada td:first-child { color: #92400e; }
+    .referencia-pie {
+      padding: 9px 14px; font-size: 12px; color: #92400e; background: #fffbeb;
+    }
+
+    /* Direcciones encontradas */
+    .direcciones { margin-top: 14px; }
+    .direccion-op {
+      display: block; width: 100%; text-align: left;
+      border: 2px solid #e3e9f2; border-radius: 10px;
+      padding: 13px 15px; margin-bottom: 9px; background: #fff;
+      cursor: pointer; font-family: inherit; font-size: 14px;
+    }
+    .direccion-op:hover  { border-color: #b9ccea; }
+    .direccion-op.activa { border-color: #16a34a; background: #f0fdf4; }
+    .direccion-op strong { display: block; font-size: 15px; letter-spacing: .04em; }
+    .direccion-op span   { font-size: 12px; color: #627080; }
+
+    /* Imágenes */
+    .adjuntar {
+      border: 2px dashed #b9ccea; border-radius: 12px;
+      padding: 22px; text-align: center; cursor: pointer;
+      background: #f8fbff; color: #415163; font-size: 13.5px;
+    }
+    .adjuntar:hover { border-color: #0d6efd; background: #eff6ff; }
+    .miniaturas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .miniatura { position: relative; width: 88px; height: 88px; }
+    .miniatura img {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 9px; border: 1px solid #d8e1eb;
+    }
+    .miniatura button {
+      position: absolute; top: -7px; right: -7px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #dc2626; color: #fff; border: none;
+      cursor: pointer; font-size: 13px; line-height: 1; padding: 0;
+    }
+
+    .aviso { padding: 12px 16px; border-radius: 10px; font-size: 13px; line-height: 1.55; }
+    .aviso.ok    { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .aviso.error { background: #fdecec; color: #991b1b; border: 1px solid #f5c6c6; }
+    .aviso.info  { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+
+    .obligatorio { color: #dc2626; }
+
+    @media (max-width: 640px) {
+      .vias, .dos-columnas { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="pagina">
+
+  <!-- ENCABEZADO -->
+  <section class="tarjeta encabezado">
+    <div>
+      <div class="empresa">
+        <img src="../IMG/logo_cotizacion.png"
+             alt="M. González Impermeabilizantes, SRL" class="logo-empresa" />
+      </div>
+      <h1>Reclamación de garantía</h1>
+      <p class="subtitulo">
+        Si su trabajo presenta una falla dentro del período de garantía, regístrela aquí.
+      </p>
+    </div>
+    <div class="estado-box" id="estadoDoc">Sin identificar</div>
+  </section>
+
+  <!-- PASO 1: IDENTIFICAR EL DOCUMENTO -->
+  <section class="tarjeta" id="tarjetaIdentificar">
+    <div class="paso">
+      <p class="paso-titulo">Paso 1 · Identifique su trabajo</p>
+      <p class="paso-sub">Elija cómo desea localizarlo.</p>
+
+      <div class="vias">
+        <button type="button" class="via" id="viaCodigo" onclick="elegirVia('codigo')">
+          <span class="via-icono">🔖</span>
+          <p class="via-titulo">Tengo el código</p>
+          <p class="via-texto">Su documento tiene un código QR o un número de garantía.</p>
+        </button>
+
+        <button type="button" class="via" id="viaDatos" onclick="elegirVia('datos')">
+          <span class="via-icono">📅</span>
+          <p class="via-titulo">No tengo código</p>
+          <p class="via-texto">Documentos anteriores. Se busca con la fecha y su teléfono.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- VÍA A: CÓDIGO -->
+    <div class="bloque" id="bloqueCodigo">
+      <div class="campo-form">
+        <label for="txtToken">
+          Número de garantía o token de verificación
+          <span class="pista">— aparece bajo el código QR de su documento</span>
+        </label>
+        <input type="text" id="txtToken" autocomplete="off" maxlength="40"
+               placeholder="Ej.: d6966248f94354dc" />
+      </div>
+      <button type="button" id="btnBuscarToken">Buscar mi garantía</button>
+      <p class="ayuda" style="margin-top:10px;">
+        Si escaneó el código QR desde su documento, esta página se llena sola.
+      </p>
+    </div>
+
+    <!-- VÍA B: FECHA Y TELÉFONO -->
+    <div class="bloque" id="bloqueDatos">
+      <div class="dos-columnas">
+        <div class="campo-form">
+          <label for="txtFecha">
+            Fecha del documento <span class="obligatorio">*</span>
+          </label>
+          <input type="date" id="txtFecha" />
+        </div>
+        <div class="campo-form">
+          <label for="txtTelefono">
+            Teléfono registrado <span class="obligatorio">*</span>
+            <span class="pista">— escriba solo los números</span>
+          </label>
+          <input type="text" id="txtTelefono" class="telefono" inputmode="numeric"
+                 value="(   )    -    " maxlength="15" />
+        </div>
+      </div>
+
+      <!-- Referencia visual -->
+      <div class="referencia">
+        <div class="referencia-titulo">Dónde encontrar estos datos en su documento</div>
+        <table>
+          <tr>
+            <td>CIUDAD</td>
+            <td>C/ ANGEL SEVERO CABRAL NO. 15, ENS. JULIETA</td>
+          </tr>
+          <tr class="destacada">
+            <td>FECHA</td>
+            <td><strong>16.01.2026</strong></td>
+          </tr>
+          <tr class="destacada">
+            <td>TELEFONO</td>
+            <td><strong>809-960-4735</strong></td>
+          </tr>
+        </table>
+        <div class="referencia-pie">
+          Copie la <strong>fecha</strong> y el <strong>teléfono</strong> tal como aparecen
+          en la parte superior de su cotización o factura.
+        </div>
+      </div>
+
+      <button type="button" id="btnBuscarDatos" style="margin-top:14px;">
+        Buscar mi trabajo
+      </button>
+
+      <div class="direcciones" id="listaDirecciones"></div>
+    </div>
+
+    <div class="aviso info" id="avisoPaso1" style="margin-top:14px;display:none;"></div>
+  </section>
+
+  <!-- PASO 2: LA RECLAMACIÓN -->
+  <section class="tarjeta" id="tarjetaReclamo" style="display:none;">
+    <div class="paso">
+      <p class="paso-titulo">Paso 2 · Cuéntenos qué ocurre</p>
+      <p class="paso-sub">Mientras más detalle, mejor podremos prepararnos para la visita.</p>
+    </div>
+
+    <div class="campo-form">
+      <label for="txtSituacion">
+        Situación observada <span class="obligatorio">*</span>
+        <span class="pista">— dónde y qué está pasando</span>
+      </label>
+      <textarea id="txtSituacion" maxlength="1200"
+                placeholder="Ej.: filtración en el techo del dormitorio principal, aparece cuando llueve fuerte."></textarea>
+    </div>
+
+    <div class="campo-form">
+      <label>Fotografías <span class="pista">— opcional, hasta 4 imágenes</span></label>
+      <div class="adjuntar" id="zonaAdjuntar">
+        📷 Toque aquí para adjuntar fotos de la falla
+      </div>
+      <input type="file" id="archivoImagenes" accept="image/*" multiple hidden />
+      <div class="miniaturas" id="miniaturas"></div>
+    </div>
+
+    <div class="campo-form">
+      <label for="txtOtra">
+        Otra información <span class="pista">— opcional</span>
+      </label>
+      <textarea id="txtOtra" maxlength="600" style="min-height:64px;"
+                placeholder="Ej.: mejor horario para la visita, cómo llegar, si hay alguien en casa."></textarea>
+    </div>
+
+    <div class="dos-columnas">
+      <div class="campo-form">
+        <label for="txtNombre">
+          Nombre de quien reporta <span class="obligatorio">*</span>
+        </label>
+        <input type="text" id="txtNombre" maxlength="150" autocomplete="name" />
+      </div>
+      <div class="campo-form">
+        <label for="txtContacto">
+          Número de contacto <span class="obligatorio">*</span>
+        </label>
+        <input type="text" id="txtContacto" class="telefono" inputmode="numeric"
+               value="(   )    -    " maxlength="15" />
+      </div>
+    </div>
+
+    <div class="campo-form">
+      <label for="txtCorreo">
+        Correo electrónico <span class="pista">— opcional</span>
+      </label>
+      <input type="email" id="txtCorreo" maxlength="150" autocomplete="email" />
+    </div>
+
+    <div class="acciones">
+      <button type="button" id="btnEnviar">Enviar reclamación</button>
+      <button type="button" id="btnCancelar"
+              style="background:#eef2f7;color:#415163;">Comenzar de nuevo</button>
+    </div>
+
+    <div class="aviso" id="avisoPaso2" style="margin-top:14px;display:none;"></div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section class="tarjeta" id="tarjetaFinal" style="display:none;">
+    <h2 style="margin:0 0 10px;font-size:22px;color:#166534;">Reclamación registrada</h2>
+    <p style="margin:0 0 6px;">Su número de reclamación es:</p>
+    <p style="font-size:26px;font-weight:700;color:#0d6efd;margin:0 0 16px;"
+       id="txtNumeroReclamo">—</p>
+    <p style="font-size:13.5px;color:#415163;line-height:1.6;margin:0 0 16px;">
+      Guárdelo para dar seguimiento. Nos comunicaremos con usted a la brevedad
+      al número que nos indicó. Si necesita atención inmediata, llame al
+      <strong>809-564-0510</strong>.
+    </p>
+    <a class="boton-enlace" href="/hacs/"
+       style="background:#eef2f7;color:#415163;">Volver a servicios en línea</a>
+  </section>
+
+  <section class="tarjeta nota-publica">
+    <p style="margin:0;font-size:13px;">
+      La garantía cubre reparaciones por desperfecto de los materiales aplicados dentro
+      del período indicado en su documento. Para consultas escriba a
+      <strong>gestion@mgonzalezimp.com.do</strong> o llame al <strong>809-564-0510</strong>.
+    </p>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js" defer></script>
+</body>
+</html>
