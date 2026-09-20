@@ -165,7 +165,7 @@
           Número de garantía o token de verificación
           <span class="pista">— aparece bajo el código QR de su documento</span>
         </label>
-        <input type="text" id="txtToken" autocomplete="off" maxlength="40"
+        <input type="text" id="txtToken" autocomplete="off" maxlength="60"
                placeholder="Ej.: d6966248f94354dc" />
       </div>
       <button type="button" id="btnBuscarToken">Buscar mi garantía</button>
@@ -220,14 +220,14 @@
         Buscar mi trabajo
       </button>
 
-      <!-- Selector de dirección: aparece al encontrar coincidencias -->
-      <div class="campo-form" id="bloqueDireccion" style="display:none;margin-top:18px;">
-        <label for="selDireccion">
-          Confirme su dirección <span class="obligatorio">*</span>
-          <span class="pista">— se muestran los primeros caracteres</span>
+      <!-- Si fecha + teléfono encuentran varias garantías, se confirma la ciudad -->
+      <div class="campo-form" id="bloqueCiudad" style="display:none;margin-top:18px;">
+        <label for="selCiudad">
+          Confirme la ciudad del documento <span class="obligatorio">*</span>
+          <span class="pista">— seleccione la que aparece impresa</span>
         </label>
-        <select id="selDireccion">
-          <option value="">— Seleccione la suya —</option>
+        <select id="selCiudad">
+          <option value="">— Seleccione la ciudad —</option>
         </select>
       </div>
     </div>
