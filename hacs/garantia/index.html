@@ -7,6 +7,22 @@
   <meta name="description" content="Consulta pública para verificar la autenticidad de una carta de garantía emitida por M. González Impermeabilizantes, SRL." />
   <link rel="icon" href="/images/favicon.png" />
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* Aviso para las cartas anteriores al sistema, que no llevan sello
+       electrónico y se localizan por fecha y teléfono. */
+    .aviso-manual {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border: 1px solid #fcd34d;
+      border-radius: 10px;
+      background: #fffbeb;
+      color: #92400e;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .aviso-manual.visible { display: block; }
+  </style>
 </head>
 <body>
   <main class="pagina">
@@ -30,7 +46,7 @@
       <label for="entradaBusqueda">Token de verificación</label>
       <div class="fila-busqueda">
         <input id="entradaBusqueda" type="text"
-               placeholder="Ej.: c39662cb2" autocomplete="off" maxlength="20" />
+               placeholder="Ej.: c39662cb2" autocomplete="off" maxlength="40" />
         <button id="btnBuscar" type="button">Buscar</button>
       </div>
 
@@ -57,8 +73,8 @@
         </div>
 
         <div class="campo">
-          <span class="etiqueta">Monto del trabajo</span>
-          <strong id="txtTotal">-</strong>
+          <span class="etiqueta">Inicio de la cobertura</span>
+          <strong id="txtInicio">-</strong>
         </div>
 
         <div class="campo campo-ancho">
@@ -71,7 +87,8 @@
           <strong id="txtComentario">-</strong>
         </div>
 
-        <div class="campo campo-ancho">
+        <!-- El sello solo existe en los documentos emitidos por el sistema -->
+        <div class="campo campo-ancho" id="bloqueSello">
           <span class="etiqueta">Sello digital de seguridad (SHA-256)</span>
           <code id="txtHash"
                 style="font-size:11px;color:#627080;word-break:break-all;display:block;margin-top:5px;">-</code>
@@ -79,8 +96,16 @@
 
       </div>
 
+      <div class="aviso-manual" id="avisoManual">
+        Esta carta de garantía fue emitida antes de la puesta en marcha del sistema de
+        documentos electrónicos, por lo que <strong>no lleva sello digital</strong>.
+        Su registro está verificado en nuestros archivos y la cobertura indicada es válida.
+      </div>
+
       <div class="acciones">
         <button id="btnCopiarLink" type="button">Copiar enlace</button>
+        <a class="boton-enlace" href="/hacs/garantia-reclamo/"
+           style="background:#0d6efd;color:#fff;">Reclamar esta garantía</a>
         <a class="boton-enlace" href="/" style="background:#eef2f7;color:#415163;">Ir al sitio</a>
       </div>
     </section>
@@ -88,7 +113,7 @@
     <!-- NOTA -->
     <section class="tarjeta nota-publica">
       <p style="margin:0;font-size:13px;">
-        Esta consulta confirma únicamente la autenticidad y el monto del documento.
+        Esta consulta confirma la autenticidad del documento y los períodos de cobertura.
         Para cualquier aclaración escriba a
         <strong>gestion@mgonzalezimp.com.do</strong> o al <strong>809-564-0510</strong>.
       </p>
