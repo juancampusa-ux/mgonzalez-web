@@ -4,12 +4,13 @@
  * Consulta el proyecto público HACS_Publico, separado del sistema
  * interno. Esta página nunca toca la base de operaciones.
  *
- * El trabajo se identifica de dos formas:
- *   · con el token del código QR, en los documentos actuales
- *   · con la fecha y el teléfono, en los documentos anteriores
+ * El trabajo se identifica de dos formas, ambas sobre wv_doc_garantia:
+ *   · con qr_token o codigo_garantia
+ *   · con fecha_documento + telefono_documento
  *
- * En el segundo caso el servidor no devuelve teléfonos ni direcciones
- * completas: solo un fragmento, para que el cliente reconozca el suyo.
+ * Si fecha + teléfono devuelve varias coincidencias, se solicita
+ * confirmar la ciudad del documento. En ambos casos, la reclamación
+ * queda vinculada mediante el qr_token real de doc_garantia.
  ************************************************************/
 
 const CONFIG = {
@@ -23,11 +24,9 @@ const sb = supabase.createClient(CONFIG.supabaseUrl, CONFIG.supabaseAnonKey);
 const $  = (id) => document.getElementById(id);
 
 const Estado = {
-  via:          null,   // 'codigo' | 'datos'
-  token:        null,
-  historicoId:  null,
-  descripcion:  null,
-  imagenes:     [],
+  via:      null,   // 'codigo' | 'datos'
+  token:    null,   // siempre qr_token real de doc_garantia
+  imagenes: [],
 };
 
 /************************************************************
@@ -118,6 +117,7 @@ function mensajeParaElCliente(error, respaldo) {
  ************************************************************/
 function elegirVia(via) {
   Estado.via = via;
+  Estado.token = null;
 
   $("viaCodigo").classList.toggle("activa", via === "codigo");
   $("viaDatos").classList.toggle("activa",  via === "datos");
@@ -125,7 +125,9 @@ function elegirVia(via) {
   $("bloqueCodigo").classList.toggle("visible", via === "codigo");
   $("bloqueDatos").classList.toggle("visible",  via === "datos");
 
-  ocultarSelectorDireccion();
+  ocultarSelectorCiudad();
+  $("tarjetaReclamo").style.display = "none";
+  fijarEstado("Sin identificar", "");
   avisar("avisoPaso1", "");
 }
 
@@ -140,6 +142,8 @@ async function buscarPorToken(tokenExterno) {
     return;
   }
 
+  Estado.token = null;
+  $("tarjetaReclamo").style.display = "none";
   avisar("avisoPaso1", "Buscando su garantía...", "info");
 
   const { data, error } = await sb.rpc("fn_validar_garantia", { p_token: token });
@@ -162,8 +166,9 @@ async function buscarPorToken(tokenExterno) {
     return;
   }
 
-  Estado.token       = token;
-  Estado.historicoId = null;
+  // Siempre guardamos el qr_token real devuelto por la base, aunque
+  // el cliente haya escrito codigo_garantia en lugar del token.
+  Estado.token = registro.qr_token;
 
   fijarEstado("Garantía " + registro.codigo_garantia, "estado-vigente");
   avisar("avisoPaso1",
@@ -189,10 +194,12 @@ async function buscarPorDatos() {
     return;
   }
 
-  avisar("avisoPaso1", "Buscando su trabajo...", "info");
-  ocultarSelectorDireccion();
+  Estado.token = null;
+  $("tarjetaReclamo").style.display = "none";
+  avisar("avisoPaso1", "Buscando su garantía...", "info");
+  ocultarSelectorCiudad();
 
-  const { data, error } = await sb.rpc("fn_buscar_historico", {
+  const { data, error } = await sb.rpc("fn_buscar_garantia_sin_codigo", {
     p_telefono: telefono,
     p_fecha:    fecha,
   });
@@ -206,62 +213,71 @@ async function buscarPorDatos() {
   }
 
   if (!data || data.length === 0) {
+    Estado.token = null;
     avisar("avisoPaso1",
-      "No encontramos un trabajo con esa fecha y ese teléfono. Verifique ambos datos en su documento; " +
-      "la fecha debe ser la misma que aparece impresa.",
+      "No encontramos una garantía vigente con esa fecha y ese teléfono. " +
+      "Verifique ambos datos tal como aparecen en su documento.",
       "error");
     fijarEstado("No encontrado", "estado-anulada");
     return;
   }
 
+  // Si existe una sola coincidencia, ya quedó identificada.
+  if (data.length === 1) {
+    const registro = data[0];
+    Estado.token = registro.qr_token;
+
+    fijarEstado("Garantía identificada", "estado-vigente");
+    avisar("avisoPaso1", "Encontramos su garantía. Puede continuar con la reclamación.", "ok");
+    abrirPaso2();
+    return;
+  }
+
+  // Si hay varias coincidencias con la misma fecha y teléfono,
+  // la ciudad funciona como validación adicional.
   avisar("avisoPaso1",
-    data.length === 1
-      ? "Encontramos su trabajo. Confirme la dirección para continuar."
-      : `Encontramos ${data.length} direcciones. Elija la que corresponde.`,
+    `Encontramos ${data.length} garantías con esos datos. Confirme la ciudad que aparece en su documento.`,
     "ok");
 
-  llenarSelectorDireccion(data);
+  llenarSelectorCiudad(data);
 }
 
-/* La dirección funciona como validación final: solo quien conoce
-   su propio domicilio reconoce el fragmento correcto. */
-function llenarSelectorDireccion(lista) {
-  const sel = $("selDireccion");
-  sel.innerHTML = '<option value="">— Seleccione la suya —</option>';
+function llenarSelectorCiudad(lista) {
+  const sel = $("selCiudad");
+  sel.innerHTML = '<option value="">— Seleccione la ciudad —</option>';
 
   lista.forEach((d) => {
     const opcion = document.createElement("option");
-    opcion.value = d.historico_id;
-    opcion.textContent = d.direccion_prefijo + "…";
+    opcion.value = d.qr_token;
+    opcion.textContent = (d.ciudad_documento || "Ciudad no registrada").trim();
     sel.appendChild(opcion);
   });
 
-  $("bloqueDireccion").style.display = "block";
+  $("bloqueCiudad").style.display = "block";
 
-  // Con una sola coincidencia igual se pide confirmar
   sel.onchange = () => {
-    const id = sel.value;
+    const token = sel.value;
 
-    if (!id) {
-      Estado.historicoId = null;
+    if (!token) {
+      Estado.token = null;
       $("tarjetaReclamo").style.display = "none";
       fijarEstado("Sin identificar", "");
       return;
     }
 
-    Estado.historicoId = Number(id);
-    Estado.token = null;
-    fijarEstado("Trabajo identificado", "estado-vigente");
+    Estado.token = token;
+    fijarEstado("Garantía identificada", "estado-vigente");
+    avisar("avisoPaso1", "Garantía identificada. Puede continuar con la reclamación.", "ok");
     abrirPaso2();
   };
 }
 
-function ocultarSelectorDireccion() {
-  const bloque = $("bloqueDireccion");
+function ocultarSelectorCiudad() {
+  const bloque = $("bloqueCiudad");
   if (!bloque) return;
+
   bloque.style.display = "none";
-  $("selDireccion").innerHTML = '<option value="">— Seleccione la suya —</option>';
-  Estado.historicoId = null;
+  $("selCiudad").innerHTML = '<option value="">— Seleccione la ciudad —</option>';
 }
 
 /************************************************************
@@ -347,6 +363,10 @@ async function enviarReclamacion() {
     avisar("avisoPaso2", "Indique un número de contacto completo.", "error");
     return;
   }
+  if (!Estado.token) {
+    avisar("avisoPaso2", "Primero debe identificar una garantía vigente.", "error");
+    return;
+  }
 
   $("btnEnviar").disabled = true;
   avisar("avisoPaso2", "Enviando su reclamación...", "info");
@@ -356,7 +376,7 @@ async function enviarReclamacion() {
     p_telefono:          formatearTelefono(contacto),
     p_descripcion_falla: situacion,
     p_token:             Estado.token,
-    p_historico_id:      Estado.historicoId,
+    p_historico_id:      null,
     p_correo:            correo || null,
     p_otra_informacion:  otra || null,
     p_imagenes:          Estado.imagenes.map(i => ({ nombre: i.nombre, tipo: i.tipo })),
@@ -402,7 +422,6 @@ function abrirPaso2() {
 function comenzarDeNuevo() {
   Estado.via = null;
   Estado.token = null;
-  Estado.historicoId = null;
   Estado.imagenes = [];
 
   ["txtToken","txtFecha","txtSituacion","txtNombre","txtCorreo","txtOtra"]
@@ -410,7 +429,7 @@ function comenzarDeNuevo() {
   ["txtTelefono","txtContacto"]
     .forEach(id => { if ($(id)) $(id).value = PLANTILLA; });
 
-  ocultarSelectorDireccion();
+  ocultarSelectorCiudad();
   $("miniaturas").innerHTML = "";
   $("tarjetaReclamo").style.display = "none";
   $("tarjetaFinal").style.display   = "none";
